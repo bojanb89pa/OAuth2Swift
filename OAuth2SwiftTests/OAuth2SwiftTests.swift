@@ -28,7 +28,17 @@ class OAuth2SwiftTests: XCTestCase {
         
         let expectationCheck = expectation(description: "Health")
         
-        API.request(OAuth2Router.Health()).responseObject { (response : DataResponse<HealthResponse>) in
+        API.request(OAuth2Router.Health()).responseObject { (response : DataResponse<Health>) in
+            
+            XCTAssert(response.result.isSuccess, "Failed to complete login request!")
+            
+            let statusCode = response.response?.statusCode
+            if statusCode != nil {
+                print("Status code: \(statusCode)")
+            }
+            
+            XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
+            
             debugPrint(response)
             expectationCheck.fulfill()
         }
@@ -45,8 +55,11 @@ class OAuth2SwiftTests: XCTestCase {
                 XCTAssert(response.result.isSuccess, "Failed to complete login request!")
                 
                 let statusCode = response.response?.statusCode
-                print("Status code: \(statusCode!)")
-                XCTAssert(statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
+                if statusCode != nil {
+                    print("Status code: \(statusCode)")
+                }
+                
+                XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
                 XCTAssertNotNil(response.result.value as OAuth2Token?, "Invalid information received from the service")
                 
                 let oauth2Token = response.result.value as OAuth2Token?
@@ -74,8 +87,11 @@ class OAuth2SwiftTests: XCTestCase {
                 XCTAssertNil(response.error, "Error while adding level!")
                 
                 let statusCode = response.response?.statusCode
-                print("Status code: \(statusCode!)")
-                XCTAssert(statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
+                if statusCode != nil {
+                    print("Status code: \(statusCode)")
+                }
+                
+                XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
                 
                 print("Level added!")
                 

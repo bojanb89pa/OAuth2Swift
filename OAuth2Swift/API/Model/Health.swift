@@ -8,7 +8,7 @@
 import UIKit
 import ObjectMapper
 
-public class HealthResponse: BaseModel {
+public class Health: BaseModel {
     
     var status: String?
     
