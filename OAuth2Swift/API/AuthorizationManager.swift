@@ -47,8 +47,9 @@ public class AuthorizationManager {
         get {
             if((_oauth2Token) == nil) {
                 let defaults = UserDefaults.standard
-                let jsonString = defaults.string(forKey: "oauth2Token")
-                _oauth2Token = OAuth2Token(JSONString: jsonString!)
+                if let jsonString = defaults.string(forKey: "oauth2Token") {
+                    _oauth2Token = OAuth2Token(JSONString: jsonString)
+                }
                 
             }
             
@@ -57,7 +58,7 @@ public class AuthorizationManager {
         set {
             _oauth2Token = newValue
             let defaults = UserDefaults.standard
-            let jsonString = oauth2Token?.toJSONString()
+            let jsonString = _oauth2Token?.toJSONString()
             defaults.set(jsonString, forKey: "oauth2Token")
         }
     }

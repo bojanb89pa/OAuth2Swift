@@ -169,10 +169,10 @@
 		364996CF1E1E757F00E70E52 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				364996D31E1E757F00E70E52 /* Model */,
 				364996D01E1E757F00E70E52 /* API.swift */,
 				364996D11E1E757F00E70E52 /* AuthorizationManager.swift */,
 				364996D21E1E757F00E70E52 /* AuthorizationType.swift */,
-				364996D31E1E757F00E70E52 /* Model */,
 				364996D81E1E757F00E70E52 /* OAuth2Handler.swift */,
 				364996D91E1E757F00E70E52 /* OAuth2Router.swift */,
 				364996DA1E1E757F00E70E52 /* RequestParameters.swift */,

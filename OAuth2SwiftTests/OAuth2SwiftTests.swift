@@ -45,6 +45,10 @@ class OAuth2SwiftTests: XCTestCase {
         waitForExpectations(timeout: 5.0, handler: nil)
     }
     
+    func testLogout() {
+        AuthorizationManager.sharedManager.oauth2Token = nil
+    }
+    
     
     func testLogin() {
         let expectationCheck = expectation(description: "Login")
