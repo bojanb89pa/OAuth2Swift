@@ -29,11 +29,11 @@ public enum OAuth2Router: URLRequestConvertible {
     
     // MARK: route names:
     
+    case Health()
     case Login(username: String, password: String)
+    case Refresh()
     case Signup(user: User)
     case GetUser(username: String)
-    case Refresh()
-    case Health()
     
     var path: String {
         switch self {
@@ -50,15 +50,9 @@ public enum OAuth2Router: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
-        case .Health:
+        case .Health, .GetUser:
             return .get
-        case .Login:
-            return .post
-        case .Signup:
-            return .post
-        case .GetUser:
-            return .get
-        case .Refresh:
+        case .Login, .Refresh, .Signup:
             return .post
         }
     }
@@ -77,22 +71,28 @@ public enum OAuth2Router: URLRequestConvertible {
             var authType : AuthorizationType? = AuthorizationType.TokenAuthorization
             
             switch self {
+                
+            case .Health():
+                authType = AuthorizationType.NoAuthorization
+                
             case .Login(let username, let password):
                 params = ["username" : username, "password" : password, "grant_type" : "password"]
                 encoding = Alamofire.URLEncoding.queryString
                 authType = AuthorizationType.ClientAuthorization
+                
             case .Refresh():
                 let refreshToken = AuthorizationManager.sharedManager.oauth2Token?.refreshToken
                 params = ["refresh_token" : refreshToken!, "grant_type" : "refresh_token"]
                 encoding = Alamofire.URLEncoding.queryString
                 authType = AuthorizationType.ClientAuthorization
+                
             case .Signup(let user):
                 params = user.toDict()
                 authType = AuthorizationType.NoAuthorization
+                
             case .GetUser(let username):
                 params = ["username" : username]
-            case .Health():
-                authType = AuthorizationType.NoAuthorization
+                
             }
             
             return (RequestParameters(parameters: params, encoding:encoding), authType!)
