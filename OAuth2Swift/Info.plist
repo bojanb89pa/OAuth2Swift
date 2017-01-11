@@ -40,14 +40,14 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-    </array>
-    <key>SERVER_URL</key>
-    <string>http://172.25.101.57:8090/orientationapp-api</string>
-    <key>SERVER_URL_DEBUG</key>
-    <string>http://172.25.101.57:8090/orientationapp-api</string>
-    <key>clientName</key>
-    <string>test_client</string>
-    <key>clientSecret</key>
-    <string>abc123</string>
+	</array>
+	<key>SERVER_URL</key>
+	<string>http://172.25.101.57:8080/oauth2</string>
+	<key>SERVER_URL_DEBUG</key>
+	<string>http://172.25.101.57:8080/oauth2</string>
+	<key>clientName</key>
+	<string>test_client</string>
+	<key>clientSecret</key>
+	<string>abc123</string>
 </dict>
 </plist>

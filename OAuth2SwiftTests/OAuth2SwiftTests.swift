@@ -82,13 +82,17 @@ class OAuth2SwiftTests: XCTestCase {
         
     }
     
-    func testAddLevel() {
+    func testRegistration() {
         
-        let expectationCheck = expectation(description: "AddLevel")
-        API.request(OAuth2Router.AddLevel(level: Level(name: "test", mapWidth: 100.0, mapHeight: 100.0)))
+        let username = "test"
+        let email = "test@mailinator.com"
+        let password = "test123"
+        
+        let expectationCheck = expectation(description: "Registration")
+        API.request(OAuth2Router.Signup(user: User(username: username, email: email, password: password)))
             .response(completionHandler: { (response) in
                 
-                XCTAssertNil(response.error, "Error while adding level!")
+                XCTAssertNil(response.error, "Error while adding user!")
                 
                 let statusCode = response.response?.statusCode
                 if statusCode != nil {
@@ -97,7 +101,32 @@ class OAuth2SwiftTests: XCTestCase {
                 
                 XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
                 
-                print("Level added!")
+                print("User added!")
+                
+                API.request(OAuth2Router.Login(username: username, password: password))
+                    .responseObject { (response: DataResponse<OAuth2Token>) in
+                        
+                        XCTAssert(response.result.isSuccess, "Failed to complete login request!")
+                        
+                        let statusCode = response.response?.statusCode
+                        if statusCode != nil {
+                            print("Status code: \(statusCode)")
+                        }
+                        
+                        XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
+                        XCTAssertNotNil(response.result.value as OAuth2Token?, "Invalid information received from the service")
+                        
+                        let oauth2Token = response.result.value as OAuth2Token?
+                        
+                        debugPrint("Access token \(oauth2Token?.accessToken)")
+                        debugPrint("Refresh token \(oauth2Token?.refreshToken)")
+                        print("Is token expired: \(oauth2Token?.isExpired())")
+                        
+                        AuthorizationManager.sharedManager.oauth2Token = oauth2Token
+                        
+                        expectationCheck.fulfill()
+                        
+                }   
                 
                 expectationCheck.fulfill()
             })

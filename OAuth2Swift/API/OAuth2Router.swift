@@ -30,7 +30,8 @@ public enum OAuth2Router: URLRequestConvertible {
     // MARK: route names:
     
     case Login(username: String, password: String)
-    case AddLevel(level: Level)
+    case Signup(user: User)
+    case GetUser(username: String)
     case Refresh()
     case Health()
     
@@ -40,8 +41,10 @@ public enum OAuth2Router: URLRequestConvertible {
             return "/health"
         case .Login, .Refresh:
             return "/oauth/token"
-        case .AddLevel:
-            return "/level"
+        case .Signup:
+            return "/signup"
+        case .GetUser:
+            return "/user"
         }
     }
     
@@ -51,8 +54,10 @@ public enum OAuth2Router: URLRequestConvertible {
             return .get
         case .Login:
             return .post
-        case .AddLevel:
+        case .Signup:
             return .post
+        case .GetUser:
+            return .get
         case .Refresh:
             return .post
         }
@@ -66,25 +71,27 @@ public enum OAuth2Router: URLRequestConvertible {
     ///
     /// - returns: A URL request.
     public func asURLRequest() throws -> URLRequest {
-        let result: (parameters: RequestParameters?, requestBody: Mappable? , authorization : AuthorizationType) = {
+        let result: (parameters: RequestParameters?, authorization : AuthorizationType) = {
             
             switch self {
             case .Login(let username, let password):
                 let params = [ "username" : username, "password" : password, "grant_type" : "password"]
-                return (RequestParameters(parameters: params as [String : AnyObject]?, encoding:Alamofire.URLEncoding.queryString), nil, AuthorizationType.ClientAuthorization)
+                return (RequestParameters(parameters: params as [String : AnyObject]?, encoding:Alamofire.URLEncoding.queryString), AuthorizationType.ClientAuthorization)
             case .Refresh():
                 let refreshToken = AuthorizationManager.sharedManager.oauth2Token?.refreshToken
                 let params = [ "refresh_token" : refreshToken!, "grant_type" : "refresh_token"]
-                return (RequestParameters(parameters: params as [String : AnyObject]?, encoding:Alamofire.URLEncoding.queryString), nil, AuthorizationType.ClientAuthorization)
-            
-            case .AddLevel(let level):
-                let parameters = level.toDict()
-                return (RequestParameters(parameters: parameters as [String : AnyObject]?), nil, AuthorizationType.TokenAuthorization)
+                return (RequestParameters(parameters: params as [String : AnyObject]?, encoding:Alamofire.URLEncoding.queryString), AuthorizationType.ClientAuthorization)
+            case .Signup(let user):
+                let parameters = user.toDict()
+                return (RequestParameters(parameters: parameters as [String : AnyObject]?), AuthorizationType.NoAuthorization)
+            case .GetUser(let username):
+                let parameters = [ "username" : username]
+                return (RequestParameters(parameters: parameters as [String : AnyObject]?), AuthorizationType.TokenAuthorization)
             case .Health():
-                return (nil, nil, AuthorizationType.NoAuthorization)
+                return (nil, AuthorizationType.NoAuthorization)
             default:
                 // default is without params and without body and with token authorization
-                return (nil, nil, AuthorizationType.TokenAuthorization)
+                return (nil, AuthorizationType.TokenAuthorization)
             }
             
         }()

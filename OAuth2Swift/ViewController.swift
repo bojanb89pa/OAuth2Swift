@@ -37,14 +37,12 @@ class ViewController: UIViewController {
                 
                 AuthorizationManager.sharedManager.oauth2Token = oauth2Token
                 
-                API.request(OAuth2Router.AddLevel(level: Level(name: "test", mapWidth: 100.0, mapHeight: 100.0)))
-                .responseData(completionHandler: { (response) in
-                    
-                    if response.result.isSuccess {
-                        print("Level added!")
-                    }
-                    
-                })
+                API.request(OAuth2Router.GetUser(username: "test"))
+                    .responseObject{ (response :DataResponse<User>) in
+                        if response.result.isSuccess {
+                            print("User email is: \(response.result.value?.email)")
+                        }
+                }
                 
         }
     }
