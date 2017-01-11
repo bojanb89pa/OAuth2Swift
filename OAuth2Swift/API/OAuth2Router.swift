@@ -72,28 +72,30 @@ public enum OAuth2Router: URLRequestConvertible {
     /// - returns: A URL request.
     public func asURLRequest() throws -> URLRequest {
         let result: (parameters: RequestParameters?, authorization : AuthorizationType) = {
+            var params : [String: Any]? = nil
+            var encoding : ParameterEncoding? = nil
+            var authType : AuthorizationType? = AuthorizationType.TokenAuthorization
             
             switch self {
             case .Login(let username, let password):
-                let params = [ "username" : username, "password" : password, "grant_type" : "password"]
-                return (RequestParameters(parameters: params as [String : AnyObject]?, encoding:Alamofire.URLEncoding.queryString), AuthorizationType.ClientAuthorization)
+                params = ["username" : username, "password" : password, "grant_type" : "password"]
+                encoding = Alamofire.URLEncoding.queryString
+                authType = AuthorizationType.ClientAuthorization
             case .Refresh():
                 let refreshToken = AuthorizationManager.sharedManager.oauth2Token?.refreshToken
-                let params = [ "refresh_token" : refreshToken!, "grant_type" : "refresh_token"]
-                return (RequestParameters(parameters: params as [String : AnyObject]?, encoding:Alamofire.URLEncoding.queryString), AuthorizationType.ClientAuthorization)
+                params = ["refresh_token" : refreshToken!, "grant_type" : "refresh_token"]
+                encoding = Alamofire.URLEncoding.queryString
+                authType = AuthorizationType.ClientAuthorization
             case .Signup(let user):
-                let parameters = user.toDict()
-                return (RequestParameters(parameters: parameters as [String : AnyObject]?), AuthorizationType.NoAuthorization)
+                params = user.toDict()
+                authType = AuthorizationType.NoAuthorization
             case .GetUser(let username):
-                let parameters = [ "username" : username]
-                return (RequestParameters(parameters: parameters as [String : AnyObject]?), AuthorizationType.TokenAuthorization)
+                params = ["username" : username]
             case .Health():
-                return (nil, AuthorizationType.NoAuthorization)
-            default:
-                // default is without params and without body and with token authorization
-                return (nil, AuthorizationType.TokenAuthorization)
+                authType = AuthorizationType.NoAuthorization
             }
             
+            return (RequestParameters(parameters: params, encoding:encoding), authType!)
         }()
         
         
@@ -134,4 +136,4 @@ public enum OAuth2Router: URLRequestConvertible {
     
 }
 
-  
+

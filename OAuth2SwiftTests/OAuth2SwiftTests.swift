@@ -126,11 +126,40 @@ class OAuth2SwiftTests: XCTestCase {
                         
                         expectationCheck.fulfill()
                         
-                }   
-                
-                expectationCheck.fulfill()
+                }
             })
         
+        waitForExpectations(timeout: 30.0, handler: nil)
+    }
+    
+    func testCheckUser() {
+        
+        let username = "test"
+        let expectationCheck = expectation(description: "Check user")
+        
+        API.request(OAuth2Router.GetUser(username: username))
+            .responseObject { (response: DataResponse<User>) in
+                
+                XCTAssert(response.result.isSuccess, "Failed to complete get user request!")
+                
+                let statusCode = response.response?.statusCode
+                if statusCode != nil {
+                    print("Status code: \(statusCode)")
+                }
+                
+                XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
+                XCTAssertNotNil(response.result.value as User?, "Invalid information received from the service")
+                
+                let user = response.result.value as User?
+                
+                debugPrint("Username: \((user?.username)!)")
+                debugPrint("Email: \((user?.email)!)")
+                
+                
+                expectationCheck.fulfill()
+        
+        }
+    
         waitForExpectations(timeout: 30.0, handler: nil)
     }
 

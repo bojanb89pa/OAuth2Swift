@@ -10,10 +10,10 @@ import Alamofire
 
 public class RequestParameters {
     
-    var parameters : [String: AnyObject]?
+    var parameters : [String: Any]?
     var encoding : ParameterEncoding?
     
-    init(parameters: [String: AnyObject]?, encoding: ParameterEncoding? = nil) {
+    init(parameters: [String: Any]?, encoding: ParameterEncoding? = nil) {
         self.parameters = parameters
         self.encoding = encoding
     }
