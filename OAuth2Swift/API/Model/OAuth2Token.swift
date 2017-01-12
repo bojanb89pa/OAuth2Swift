@@ -14,8 +14,8 @@ public class OAuth2Token : BaseModel {
     var expirationDate: Date!
     var expiresIn: Int! {
         willSet(newValue) {
-            if(newValue != nil) {
-                expirationDate = Date.init(timeIntervalSince1970: Date().timeIntervalSince1970 + Double(newValue!))
+            if let value = newValue {
+                expirationDate = Date.init(timeIntervalSince1970: Date().timeIntervalSince1970 + Double(value))
             }
         }
     }
@@ -31,8 +31,8 @@ public class OAuth2Token : BaseModel {
     }
     
     func isExpired() -> Bool {
-        if ((expirationDate != nil)) {
-            if(Date().compare(expirationDate) == ComparisonResult.orderedDescending) {
+        if let expDate = expirationDate {
+            if(Date().compare(expDate) == ComparisonResult.orderedDescending) {
                 return true;
             }
         }

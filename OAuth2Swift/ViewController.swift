@@ -31,8 +31,13 @@ class ViewController: UIViewController {
                     return
                 }
                 
-                debugPrint("Access token \(oauth2Token.accessToken!)")
-                debugPrint("Refresh token \(oauth2Token.refreshToken!)")
+                if let accessToken = oauth2Token.accessToken {
+                    print("Access token \(accessToken)")
+                }
+                if let refreshToken = oauth2Token.accessToken {
+                    print("Refresh token \(refreshToken)")
+                }
+                
                 print("Is token expired: \(oauth2Token.isExpired())")
                 
                 AuthorizationManager.sharedManager.oauth2Token = oauth2Token

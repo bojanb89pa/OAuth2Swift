@@ -32,12 +32,13 @@ class OAuth2SwiftTests: XCTestCase {
             
             XCTAssert(response.result.isSuccess, "Failed to complete login request!")
             
-            let statusCode = response.response?.statusCode
-            if statusCode != nil {
+            var statusCode200 = false
+            if let statusCode = response.response?.statusCode {
+                statusCode200 = statusCode >= 200 && statusCode < 300
                 print("Status code: \(statusCode)")
             }
             
-            XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
+            XCTAssert(statusCode200, "Status code wasn't 2xx")
             
             debugPrint(response)
             expectationCheck.fulfill()
@@ -58,12 +59,14 @@ class OAuth2SwiftTests: XCTestCase {
                 
                 XCTAssert(response.result.isSuccess, "Failed to complete login request!")
                 
-                let statusCode = response.response?.statusCode
-                if statusCode != nil {
+                var statusCode200 = false
+                if let statusCode = response.response?.statusCode {
+                    statusCode200 = statusCode >= 200 && statusCode < 300
                     print("Status code: \(statusCode)")
                 }
                 
-                XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
+                XCTAssert(statusCode200, "Status code wasn't 2xx")
+                
                 XCTAssertNotNil(response.result.value as OAuth2Token?, "Invalid information received from the service")
                 
                 let oauth2Token = response.result.value as OAuth2Token?
@@ -94,12 +97,13 @@ class OAuth2SwiftTests: XCTestCase {
                 
                 XCTAssertNil(response.error, "Error while adding user!")
                 
-                let statusCode = response.response?.statusCode
-                if statusCode != nil {
+                var statusCode200 = false
+                if let statusCode = response.response?.statusCode {
+                    statusCode200 = statusCode >= 200 && statusCode < 300
                     print("Status code: \(statusCode)")
                 }
                 
-                XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
+                XCTAssert(statusCode200, "Status code wasn't 2xx")
                 
                 print("User added!")
                 
@@ -108,12 +112,14 @@ class OAuth2SwiftTests: XCTestCase {
                         
                         XCTAssert(response.result.isSuccess, "Failed to complete login request!")
                         
-                        let statusCode = response.response?.statusCode
-                        if statusCode != nil {
+                        var statusCode200 = false
+                        if let statusCode = response.response?.statusCode {
+                            statusCode200 = statusCode >= 200 && statusCode < 300
                             print("Status code: \(statusCode)")
                         }
                         
-                        XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
+                        XCTAssert(statusCode200, "Status code wasn't 2xx")
+                        
                         XCTAssertNotNil(response.result.value as OAuth2Token?, "Invalid information received from the service")
                         
                         let oauth2Token = response.result.value as OAuth2Token?
@@ -142,12 +148,13 @@ class OAuth2SwiftTests: XCTestCase {
                 
                 XCTAssert(response.result.isSuccess, "Failed to complete get user request!")
                 
-                let statusCode = response.response?.statusCode
-                if statusCode != nil {
+                var statusCode200 = false
+                if let statusCode = response.response?.statusCode {
+                    statusCode200 = statusCode >= 200 && statusCode < 300
                     print("Status code: \(statusCode)")
                 }
                 
-                XCTAssert(statusCode != nil && statusCode! >= 200 && statusCode! < 300, "Status code wasn't 2xx")
+                XCTAssert(statusCode200, "Status code wasn't 2xx")
                 XCTAssertNotNil(response.result.value as User?, "Invalid information received from the service")
                 
                 let user = response.result.value as User?
