@@ -26,6 +26,7 @@
 		364996E41E1E757F00E70E52 /* RequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996DA1E1E757F00E70E52 /* RequestParameters.swift */; };
 		364996E81E1E75CB00E70E52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996E71E1E75CB00E70E52 /* ViewController.swift */; };
 		364996EB1E1E768900E70E52 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996EA1E1E768900E70E52 /* StringUtils.swift */; };
+		36CFAB0F1E27B875002962A1 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CFAB0E1E27B875002962A1 /* ApiError.swift */; };
 		7830C9C9BCFA97339E6E7856 /* Pods_OAuth2Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0360EEC60CC2D1FDAC4A8B3A /* Pods_OAuth2Swift.framework */; };
 		851C9C79808C3ED284AAD8AD /* Pods_OAuth2SwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB108D32EEDE5BE5B873465B /* Pods_OAuth2SwiftTests.framework */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		364996DA1E1E757F00E70E52 /* RequestParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestParameters.swift; sourceTree = "<group>"; };
 		364996E71E1E75CB00E70E52 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		364996EA1E1E768900E70E52 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		36CFAB0E1E27B875002962A1 /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		3FB3E14B45792FCCB038730C /* Pods-OAuth2SwiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAuth2SwiftUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OAuth2SwiftUITests/Pods-OAuth2SwiftUITests.release.xcconfig"; sourceTree = "<group>"; };
 		44778CD19B52E280E1C15489 /* Pods-OAuth2Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAuth2Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-OAuth2Swift/Pods-OAuth2Swift.release.xcconfig"; sourceTree = "<group>"; };
 		74F940423BB62A7473FF8D7E /* Pods-OAuth2SwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAuth2SwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OAuth2SwiftUITests/Pods-OAuth2SwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				364996D51E1E757F00E70E52 /* Health.swift */,
 				364996D61E1E757F00E70E52 /* User.swift */,
 				364996D71E1E757F00E70E52 /* OAuth2Token.swift */,
+				36CFAB0E1E27B875002962A1 /* ApiError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				364996DF1E1E757F00E70E52 /* Health.swift in Sources */,
 				364996E21E1E757F00E70E52 /* OAuth2Handler.swift in Sources */,
 				364996E31E1E757F00E70E52 /* OAuth2Router.swift in Sources */,
+				36CFAB0F1E27B875002962A1 /* ApiError.swift in Sources */,
 				364996E81E1E75CB00E70E52 /* ViewController.swift in Sources */,
 				364996DB1E1E757F00E70E52 /* API.swift in Sources */,
 				364996A21E1E6E4600E70E52 /* AppDelegate.swift in Sources */,

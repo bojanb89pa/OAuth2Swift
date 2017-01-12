@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import ObjectMapper
 
 class API: NSObject {
     
@@ -27,9 +28,19 @@ class API: NSObject {
             switch response.result {
             case .success:
                 print("Validation Successful")
-            case .failure(let error):
-                // handling general errors
-                print(error)
+            case .failure:
+                do {
+                    let apiErrorDict = try JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as! [String:Any]
+                    if let code = apiErrorDict["code"] as? Int,
+                        let codeMessage = apiErrorDict["codeMessage"] as? String {
+                        // handling general errors
+//                        let apiError = ApiError(code:code, codeMessage: codeMessage)
+                        print("Received error with code: \(code), and code message: \(codeMessage)")
+                    }
+                } catch let error as NSError {
+                    print(error)
+                }
+                
             }
         }
     }

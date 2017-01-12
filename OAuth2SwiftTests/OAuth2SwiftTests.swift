@@ -40,7 +40,7 @@ class OAuth2SwiftTests: XCTestCase {
             
             XCTAssert(statusCode200, "Status code wasn't 2xx")
             
-            debugPrint(response)
+            print(response)
             expectationCheck.fulfill()
         }
         waitForExpectations(timeout: 5.0, handler: nil)
@@ -71,8 +71,14 @@ class OAuth2SwiftTests: XCTestCase {
                 
                 let oauth2Token = response.result.value as OAuth2Token?
                 
-                debugPrint("Access token \(oauth2Token?.accessToken)")
-                debugPrint("Refresh token \(oauth2Token?.refreshToken)")
+                
+                if let accessToken = oauth2Token?.accessToken {
+                    print("Access token \(accessToken)")
+                }
+                if let refreshToken = oauth2Token?.accessToken {
+                    print("Refresh token \(refreshToken)")
+                }
+                
                 print("Is token expired: \(oauth2Token?.isExpired())")
                 
                 AuthorizationManager.sharedManager.oauth2Token = oauth2Token
@@ -105,33 +111,41 @@ class OAuth2SwiftTests: XCTestCase {
                 
                 XCTAssert(statusCode200, "Status code wasn't 2xx")
                 
-                print("User added!")
-                
-                API.request(OAuth2Router.Login(username: username, password: password))
-                    .responseObject { (response: DataResponse<OAuth2Token>) in
-                        
-                        XCTAssert(response.result.isSuccess, "Failed to complete login request!")
-                        
-                        var statusCode200 = false
-                        if let statusCode = response.response?.statusCode {
-                            statusCode200 = statusCode >= 200 && statusCode < 300
-                            print("Status code: \(statusCode)")
-                        }
-                        
-                        XCTAssert(statusCode200, "Status code wasn't 2xx")
-                        
-                        XCTAssertNotNil(response.result.value as OAuth2Token?, "Invalid information received from the service")
-                        
-                        let oauth2Token = response.result.value as OAuth2Token?
-                        
-                        debugPrint("Access token \(oauth2Token?.accessToken)")
-                        debugPrint("Refresh token \(oauth2Token?.refreshToken)")
-                        print("Is token expired: \(oauth2Token?.isExpired())")
-                        
-                        AuthorizationManager.sharedManager.oauth2Token = oauth2Token
-                        
-                        expectationCheck.fulfill()
-                        
+                if statusCode200 {
+                    print("User added!")
+                    
+                    API.request(OAuth2Router.Login(username: username, password: password))
+                        .responseObject { (response: DataResponse<OAuth2Token>) in
+                            
+                            XCTAssert(response.result.isSuccess, "Failed to complete login request!")
+                            
+                            var statusCode200 = false
+                            if let statusCode = response.response?.statusCode {
+                                statusCode200 = statusCode >= 200 && statusCode < 300
+                                print("Status code: \(statusCode)")
+                            }
+                            
+                            XCTAssert(statusCode200, "Status code wasn't 2xx")
+                            
+                            XCTAssertNotNil(response.result.value as OAuth2Token?, "Invalid information received from the service")
+                            
+                            let oauth2Token = response.result.value as OAuth2Token?
+                            
+                            if let accessToken = oauth2Token?.accessToken {
+                                print("Access token \(accessToken)")
+                            }
+                            if let refreshToken = oauth2Token?.accessToken {
+                                print("Refresh token \(refreshToken)")
+                            }
+                            
+                            print("Is token expired: \(oauth2Token?.isExpired())")
+                            
+                            AuthorizationManager.sharedManager.oauth2Token = oauth2Token
+                            
+                            expectationCheck.fulfill()
+                            
+                    }
+                    
                 }
             })
         
@@ -159,17 +173,22 @@ class OAuth2SwiftTests: XCTestCase {
                 
                 let user = response.result.value as User?
                 
-                debugPrint("Username: \((user?.username)!)")
-                debugPrint("Email: \((user?.email)!)")
+                if let username = user?.username {
+                    print("Username: \(username)")
+                }
+                
+                if let email = user?.email {
+                    print("Email: \(email)")
+                }
                 
                 
                 expectationCheck.fulfill()
-        
+                
         }
-    
+        
         waitForExpectations(timeout: 30.0, handler: nil)
     }
-
+    
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
