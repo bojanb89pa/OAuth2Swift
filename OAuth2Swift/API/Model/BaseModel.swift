@@ -19,8 +19,11 @@ public class BaseModel: Mappable {
         let otherSelf = Mirror(reflecting: self)
         for child in otherSelf.children {
             if let key = child.label {
-                dict[key] = unwrap(any: child.value)
-                
+                if let baseModel : BaseModel = child.value as? BaseModel {
+                    dict[key] = baseModel.toDict()
+                } else {
+                    dict[key] = unwrap(any: child.value)
+                }
             }
         }
         return dict
