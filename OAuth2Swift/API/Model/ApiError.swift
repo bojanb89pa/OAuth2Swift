@@ -18,7 +18,7 @@ class ApiError: BaseModel {
         super.init(map: map)
     }
     
-    init(code: Int?, error: String){
+    init(code: Int = 0, error: String){
         super.init()!
         self.code = code
         self.error = error

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,20 +21,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6r-eS-hyR">
-                                <frame key="frameInset" minX="168" minY="617" width="38" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6r-eS-hyR">
+                                <rect key="frame" x="21" y="110" width="49" height="30"/>
+                                <state key="normal" title="LOG IN"/>
                                 <connections>
                                     <action selector="loginPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LYK-bE-ZxX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dr8-RM-ahB">
+                                <rect key="frame" x="21" y="40" width="121" height="30"/>
+                                <state key="normal" title="CHECK SERVER"/>
+                                <connections>
+                                    <action selector="checkServer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jsx-UV-ieu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pa-tS-yZE">
+                                <rect key="frame" x="21" y="180" width="66" height="30"/>
+                                <state key="normal" title="LOG OUT"/>
+                                <connections>
+                                    <action selector="logout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="goz-V9-GSH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nA-TL-0CD">
+                                <rect key="frame" x="21" y="250" width="70" height="30"/>
+                                <state key="normal" title="REGISTER"/>
+                                <connections>
+                                    <action selector="register:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gtV-AV-eLE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fea-vY-gaw">
+                                <rect key="frame" x="21" y="320" width="93" height="30"/>
+                                <state key="normal" title="CHECK USER"/>
+                                <connections>
+                                    <action selector="checkUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uDQ-0F-UNX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dr8-RM-ahB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="1FG-pO-1Nr"/>
+                            <constraint firstItem="2Pa-tS-yZE" firstAttribute="top" secondItem="J6r-eS-hyR" secondAttribute="bottom" constant="40" id="3Lf-wy-Ikg"/>
+                            <constraint firstItem="dr8-RM-ahB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="IkR-KD-Hhl"/>
+                            <constraint firstItem="J6r-eS-hyR" firstAttribute="leading" secondItem="dr8-RM-ahB" secondAttribute="leading" id="TZA-9q-M5H"/>
+                            <constraint firstItem="fea-vY-gaw" firstAttribute="top" secondItem="4nA-TL-0CD" secondAttribute="bottom" constant="40" id="bRI-f7-MOJ"/>
+                            <constraint firstItem="4nA-TL-0CD" firstAttribute="top" secondItem="2Pa-tS-yZE" secondAttribute="bottom" constant="40" id="gMH-PL-WqJ"/>
+                            <constraint firstItem="4nA-TL-0CD" firstAttribute="leading" secondItem="2Pa-tS-yZE" secondAttribute="leading" id="hmR-C2-Ipb"/>
+                            <constraint firstItem="J6r-eS-hyR" firstAttribute="top" secondItem="dr8-RM-ahB" secondAttribute="bottom" constant="40" id="mb6-cw-SxO"/>
+                            <constraint firstItem="fea-vY-gaw" firstAttribute="leading" secondItem="4nA-TL-0CD" secondAttribute="leading" id="whK-7a-sCZ"/>
+                            <constraint firstItem="2Pa-tS-yZE" firstAttribute="leading" secondItem="J6r-eS-hyR" secondAttribute="leading" id="xEq-eb-GqY"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="35.532233883058474"/>
         </scene>
     </scenes>
 </document>
