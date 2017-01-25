@@ -31,11 +31,14 @@ class API: NSObject {
             case .failure:
                 do {
                     let apiErrorDict = try JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as! [String:Any]
-                    if let code = apiErrorDict["code"] as? Int,
-                        let codeMessage = apiErrorDict["codeMessage"] as? String {
-                        // handling general errors
-//                        let apiError = ApiError(code:code, codeMessage: codeMessage)
-                        print("Received error with code: \(code), and code message: \(codeMessage)")
+                    
+                    // handling general errors
+                    //                        let apiError = ApiError(code:code, error: error)
+                    if let error = apiErrorDict["error"] as? String {
+                        print("Received error: \(error)")
+                    }
+                    if let code = apiErrorDict["code"] as? Int {
+                        print("Error code: \(code)")
                     }
                 } catch let error as NSError {
                     print(error)

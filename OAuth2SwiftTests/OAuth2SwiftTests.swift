@@ -30,7 +30,7 @@ class OAuth2SwiftTests: XCTestCase {
         
         API.request(OAuth2Router.Health()).responseObject { (response : DataResponse<Health>) in
             
-            XCTAssert(response.result.isSuccess, "Failed to complete login request!")
+            XCTAssert(response.result.isSuccess, "Failed to complete health request!")
             
             var statusCode200 = false
             if let statusCode = response.response?.statusCode {

@@ -12,20 +12,20 @@ import ObjectMapper
 class ApiError: BaseModel {
     
     var code: Int?
-    var codeMessage: String?
+    var error: String?
     
     required public init?(map: Map){
         super.init(map: map)
     }
     
-    init(code: Int?, codeMessage: String){
+    init(code: Int?, error: String){
         super.init()!
         self.code = code
-        self.codeMessage = codeMessage
+        self.error = error
     }
     
     override public func mapping(map: Map) {
         code <- map["code"]
-        codeMessage <- map["codeMessage"]
+        error <- map["error"]
     }
 }
