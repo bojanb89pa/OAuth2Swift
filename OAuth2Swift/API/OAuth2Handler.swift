@@ -46,12 +46,13 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
     func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
         lock.lock() ; defer { lock.unlock() }
         
+        var shouldRetry = false
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
             if (request.request?.allHTTPHeaderFields?.keys.contains(AuthorizationManager.HEADER_AUTH))! {
                 let headerAuthorization : String = (request.request?.value(forHTTPHeaderField: AuthorizationManager.HEADER_AUTH))!
-                if headerAuthorization.hasPrefix(AuthorizationManager.AUTH_BEARER), !headerAuthorization.hasSuffix((AuthorizationManager.sharedManager.oauth2Token?.accessToken)!){
+                if headerAuthorization.hasPrefix(AuthorizationManager.AUTH_BEARER){
                     requestsToRetry.append(completion)
-                    
+                    shouldRetry = true
                     if !isRefreshing {
                         refreshTokens { [weak self] succeeded in
                             guard let strongSelf = self else { return }
@@ -64,7 +65,8 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
                     }
                 }
             }
-        } else {
+        }
+        if !shouldRetry {
             completion(false, 0.0)
         }
     }

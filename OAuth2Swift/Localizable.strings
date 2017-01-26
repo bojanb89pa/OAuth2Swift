@@ -5,5 +5,18 @@
   Created by Bojan Bogojevic on 1/26/17.
   Copyright © 2017 Gecko Solutions. All rights reserved.
 */
-"error.DEFAULT_ERROR" = "Error occurred!";
+
+//Error list
+//400
+"error.40000_BAD_REQUEST_DATA" = "Error occurred!";
+"error.40001_BAD_REQUEST_PARAMS" = "Error occurred!";
+
+//403
 "error.40300_USER_EXISTS" = "User exists!";
+
+//500 and other
+"error.DEFAULT_ERROR" = "Error occurred!";
+
+//OAuth 2.0 (401) errors:
+"error.invalid_token" = "Invalid Token!";
+"error.unauthorized" = "Unauthorized!";
