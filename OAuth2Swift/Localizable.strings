@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  OAuth2Swift
+
+  Created by Bojan Bogojevic on 1/26/17.
+  Copyright © 2017 Gecko Solutions. All rights reserved.
+*/
+"error.DEFAULT_ERROR" = "Error occurred!";
+"error.40300_USER_EXISTS" = "User exists!";

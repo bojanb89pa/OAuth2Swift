@@ -30,7 +30,7 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
         if (urlRequest.url != nil) {
             var urlRequest = urlRequest
             if (urlRequest.allHTTPHeaderFields?.keys.contains(AuthorizationManager.HEADER_AUTH))! {
-                let headerAuthorization : String = urlRequest.value(forHTTPHeaderField: AuthorizationManager.HEADER_AUTH)!;
+                let headerAuthorization : String = urlRequest.value(forHTTPHeaderField: AuthorizationManager.HEADER_AUTH)!
                 if headerAuthorization.hasPrefix(AuthorizationManager.AUTH_BEARER), !headerAuthorization.hasSuffix((AuthorizationManager.sharedManager.oauth2Token?.accessToken)!){
                     urlRequest.setValue((AuthorizationManager.sharedManager.getTokenAuthorization()), forHTTPHeaderField: AuthorizationManager.HEADER_AUTH)
                 }
@@ -47,16 +47,21 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
         lock.lock() ; defer { lock.unlock() }
         
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
-            requestsToRetry.append(completion)
-            
-            if !isRefreshing {
-                refreshTokens { [weak self] succeeded in
-                    guard let strongSelf = self else { return }
+            if (request.request?.allHTTPHeaderFields?.keys.contains(AuthorizationManager.HEADER_AUTH))! {
+                let headerAuthorization : String = (request.request?.value(forHTTPHeaderField: AuthorizationManager.HEADER_AUTH))!
+                if headerAuthorization.hasPrefix(AuthorizationManager.AUTH_BEARER), !headerAuthorization.hasSuffix((AuthorizationManager.sharedManager.oauth2Token?.accessToken)!){
+                    requestsToRetry.append(completion)
                     
-                    strongSelf.lock.lock() ; defer { strongSelf.lock.unlock() }
-                    
-                    strongSelf.requestsToRetry.forEach { $0(succeeded, 0.0) }
-                    strongSelf.requestsToRetry.removeAll()
+                    if !isRefreshing {
+                        refreshTokens { [weak self] succeeded in
+                            guard let strongSelf = self else { return }
+                            
+                            strongSelf.lock.lock() ; defer { strongSelf.lock.unlock() }
+                            
+                            strongSelf.requestsToRetry.forEach { $0(succeeded, 0.0) }
+                            strongSelf.requestsToRetry.removeAll()
+                        }
+                    }
                 }
             }
         } else {

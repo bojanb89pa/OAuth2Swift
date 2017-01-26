@@ -32,16 +32,22 @@ class API: NSObject {
                 do {
                     let apiErrorDict = try JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as! [String:Any]
                     
+                    
+                    
                     // handling general errors
-                    //                        let apiError = ApiError(code:code, error: error)
+                    let apiError = ApiError()
                     if let code = apiErrorDict["code"] as? Int {
                         print("Error code: \(code)")
+                        apiError.code = code
                     }
                     if let error = apiErrorDict["error"] as? String {
                         print("Received error: \(error)")
-                        
+                        apiError.error = error
+                    }
+                    
+                    if let localizedError = apiError.localizedError {
                         if let vc = viewController {
-                            let alertController = UIAlertController(title: "Error", message: error, preferredStyle: UIAlertControllerStyle.alert)
+                            let alertController = UIAlertController(title: "Error", message: localizedError, preferredStyle: UIAlertControllerStyle.alert)
                             
                             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
                                 (result : UIAlertAction) -> Void in

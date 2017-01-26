@@ -20,6 +20,10 @@ public class OAuth2Token : BaseModel {
         }
     }
     
+    override init?() {
+        super.init()
+    }
+    
     required public init?(map: Map){
         super.init(map: map)
     }
