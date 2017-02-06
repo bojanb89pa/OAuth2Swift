@@ -88,7 +88,7 @@ class ViewController: UIViewController {
                     print("Access token \(accessToken)")
                     self.showMessage("Access token: \(accessToken)")
                 }
-                if let refreshToken = oauth2Token.accessToken {
+                if let refreshToken = oauth2Token.refreshToken {
                     print("Refresh token \(refreshToken)")
                 }
                 
