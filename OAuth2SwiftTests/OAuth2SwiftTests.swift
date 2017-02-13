@@ -50,6 +50,15 @@ class OAuth2SwiftTests: XCTestCase {
         AuthorizationManager.sharedManager.oauth2Token = nil
     }
     
+    func testFakeToken() {
+        let token : OAuth2Token = OAuth2Token()!
+        token.accessToken = "fakeAccessToken"
+        token.refreshToken = "fakeRefreshToken"
+        
+        token.expirationDate = Date(timeInterval: 1000, since: Date())
+        AuthorizationManager.sharedManager.oauth2Token = token
+    }
+    
     
     func testLogin() {
         let expectationCheck = expectation(description: "Login")

@@ -45,26 +45,38 @@ class API: NSObject {
                         apiError.error = error
                     }
                     
-                    if let localizedError = apiError.localizedError {
-                        if let vc = viewController {
-                            let alertController = UIAlertController(title: "Error", message: localizedError, preferredStyle: UIAlertControllerStyle.alert)
-                            
-                            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-                                (result : UIAlertAction) -> Void in
-                                print("OK")
-                            }
-                            
-                            alertController.addAction(okAction)
-                            
-                            vc.present(alertController, animated: true, completion: nil)
-                        }
+                    if let vc = viewController {
+                        showError(vc, apiError.localizedError)
                     }
                     
                 } catch let error as NSError {
                     print(error)
+                    if let vc = viewController {
+                        showError(vc)
+                    }
                 }
                 
             }
         }
+    }
+    
+    
+    
+    static private func showError(_ viewController: ViewController, _ localizedError : String? = nil) {
+        
+        var message = NSLocalizedString("error.DEFAULT_ERROR", value: "Error occurred!", comment: "DEFAULT_ERROR")
+        if let locError = localizedError {
+            message = locError
+        }
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+            print("OK")
+        }
+        
+        alertController.addAction(okAction)
+        
+        viewController.present(alertController, animated: true, completion: nil)
     }
 }
