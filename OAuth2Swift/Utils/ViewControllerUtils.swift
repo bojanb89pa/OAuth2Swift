@@ -12,7 +12,7 @@ extension UIViewController {
     func showOKAlert(title : String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         
-        let title = NSLocalizedString("popup.ok", value: "OK", comment: "OK")
+        let title = NSLocalizedString("popup.button.ok", value: "OK", comment: "OK")
         
         let okAction = UIAlertAction(title: title, style: UIAlertActionStyle.default) {
             (result : UIAlertAction) -> Void in

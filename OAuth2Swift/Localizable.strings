@@ -7,7 +7,7 @@
 */
 
 // Popup alerts
-"popup.ok" = "OK";
+"popup.button.ok" = "OK";
 
 //Error list
 //400
