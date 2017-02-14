@@ -6,6 +6,9 @@
   Copyright © 2017 Gecko Solutions. All rights reserved.
 */
 
+// Popup alerts
+"popup.ok" = "OK";
+
 //Error list
 //400
 "error.40000_BAD_REQUEST_DATA" = "Error occurred!";

@@ -20,7 +20,7 @@ class API: NSObject {
         return SessionManager(configuration: configuration)
     }()
     
-    static public func request(_ urlRequest: URLRequestConvertible, viewController: ViewController? = nil) -> DataRequest {
+    static public func request(_ urlRequest: URLRequestConvertible, viewController: UIViewController? = nil) -> DataRequest {
         
         sessionManager.retrier = OAuth2Handler()
         sessionManager.adapter = OAuth2Handler()
@@ -62,21 +62,11 @@ class API: NSObject {
     
     
     
-    static private func showError(_ viewController: ViewController, _ localizedError : String? = nil) {
-        
+    static private func showError(_ viewController: UIViewController, _ localizedError : String? = nil) {
         var message = NSLocalizedString("error.DEFAULT_ERROR", value: "Error occurred!", comment: "DEFAULT_ERROR")
         if let locError = localizedError {
             message = locError
         }
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
-            (result : UIAlertAction) -> Void in
-            print("OK")
-        }
-        
-        alertController.addAction(okAction)
-        
-        viewController.present(alertController, animated: true, completion: nil)
+        viewController.showOKAlert(title: "Error", message: message)
     }
 }
