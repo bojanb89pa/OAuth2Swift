@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func checkServer(_ sender: Any) {
-        API.request(OAuth2Router.Health(), viewController:self)
+        API.request(Router.Health(), viewController:self)
             .responseObject { (response :DataResponse<Health>) in
                 if response.result.isSuccess {
                     if let status = response.result.value?.status {
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         let email = "test@mailinator.com"
         let password = "test123"
         
-        API.request(OAuth2Router.Signup(user: User(username: username, email: email, password: password)), viewController: self)
+        API.request(Router.Signup(user: User(username: username, email: email, password: password)), viewController: self)
             .responseData {response in
                 if response.result.isSuccess {
                     self.login(username, password)
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         
         let username = "test"
         
-        API.request(OAuth2Router.GetUser(username: username), viewController:self)
+        API.request(Router.GetUser(username: username), viewController:self)
             .responseObject { (response: DataResponse<User>) in
                 if response.result.isSuccess {
                     if let user = response.result.value {
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
     }
     
     func login(_ username: String, _ password: String) {
-        API.request(OAuth2Router.Login(username: username, password: password), viewController:self)
+        API.request(Router.Login(username: username, password: password), viewController:self)
             .responseObject { (response: DataResponse<OAuth2Token>) in
                 
                 guard let oauth2Token = response.result.value as OAuth2Token? else {

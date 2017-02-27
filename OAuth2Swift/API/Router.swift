@@ -1,5 +1,5 @@
 //
-//  OAuth2Router.swift
+//  Router.swift
 //  OAuth2Swiftn//
 //  Created by Bojan Bogojevic on 11/3/16.
 //  Copyright © 2016 Gecko Solutions. All rights reserved.
@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
-public enum OAuth2Router: URLRequestConvertible {
+public enum Router: URLRequestConvertible {
     
     static let timeoutInterval = TimeInterval(10 * 1000)        // 10s
     
@@ -108,7 +108,7 @@ public enum OAuth2Router: URLRequestConvertible {
             urlRequest.setValue(authorizationValue, forHTTPHeaderField: AuthorizationManager.HEADER_AUTH)
         }
         
-        urlRequest.timeoutInterval = OAuth2Router.timeoutInterval
+        urlRequest.timeoutInterval = Router.timeoutInterval
         
         return try addParamsToRequest(urlRequest: urlRequest, requestParams: result.parameters, method: method)
         

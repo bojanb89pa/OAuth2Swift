@@ -28,7 +28,7 @@ class OAuth2SwiftTests: XCTestCase {
         
         let expectationCheck = expectation(description: "Health")
         
-        API.request(OAuth2Router.Health()).responseObject { (response : DataResponse<Health>) in
+        API.request(Router.Health()).responseObject { (response : DataResponse<Health>) in
             
             XCTAssert(response.result.isSuccess, "Failed to complete health request!")
             
@@ -63,7 +63,7 @@ class OAuth2SwiftTests: XCTestCase {
     func testLogin() {
         let expectationCheck = expectation(description: "Login")
         
-        API.request(OAuth2Router.Login(username: "user", password: "password"))
+        API.request(Router.Login(username: "user", password: "password"))
             .responseObject { (response: DataResponse<OAuth2Token>) in
                 
                 XCTAssert(response.result.isSuccess, "Failed to complete login request!")
@@ -107,7 +107,7 @@ class OAuth2SwiftTests: XCTestCase {
         let password = "test123"
         
         let expectationCheck = expectation(description: "Registration")
-        API.request(OAuth2Router.Signup(user: User(username: username, email: email, password: password)))
+        API.request(Router.Signup(user: User(username: username, email: email, password: password)))
             .response(completionHandler: { (response) in
                 
                 XCTAssertNil(response.error, "Error while adding user!")
@@ -123,7 +123,7 @@ class OAuth2SwiftTests: XCTestCase {
                 if statusCode200 {
                     print("User added!")
                     
-                    API.request(OAuth2Router.Login(username: username, password: password))
+                    API.request(Router.Login(username: username, password: password))
                         .responseObject { (response: DataResponse<OAuth2Token>) in
                             
                             XCTAssert(response.result.isSuccess, "Failed to complete login request!")
@@ -166,7 +166,7 @@ class OAuth2SwiftTests: XCTestCase {
         let username = "test"
         let expectationCheck = expectation(description: "Check user")
         
-        API.request(OAuth2Router.GetUser(username: username))
+        API.request(Router.GetUser(username: username))
             .responseObject { (response: DataResponse<User>) in
                 
                 XCTAssert(response.result.isSuccess, "Failed to complete get user request!")

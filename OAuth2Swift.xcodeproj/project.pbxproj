@@ -22,7 +22,7 @@
 		364996E01E1E757F00E70E52 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D61E1E757F00E70E52 /* User.swift */; };
 		364996E11E1E757F00E70E52 /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D71E1E757F00E70E52 /* OAuth2Token.swift */; };
 		364996E21E1E757F00E70E52 /* OAuth2Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D81E1E757F00E70E52 /* OAuth2Handler.swift */; };
-		364996E31E1E757F00E70E52 /* OAuth2Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D91E1E757F00E70E52 /* OAuth2Router.swift */; };
+		364996E31E1E757F00E70E52 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D91E1E757F00E70E52 /* Router.swift */; };
 		364996E41E1E757F00E70E52 /* RequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996DA1E1E757F00E70E52 /* RequestParameters.swift */; };
 		364996E81E1E75CB00E70E52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996E71E1E75CB00E70E52 /* ViewController.swift */; };
 		364996EB1E1E768900E70E52 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996EA1E1E768900E70E52 /* StringUtils.swift */; };
@@ -74,7 +74,7 @@
 		364996D61E1E757F00E70E52 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		364996D71E1E757F00E70E52 /* OAuth2Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
 		364996D81E1E757F00E70E52 /* OAuth2Handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Handler.swift; sourceTree = "<group>"; };
-		364996D91E1E757F00E70E52 /* OAuth2Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Router.swift; sourceTree = "<group>"; };
+		364996D91E1E757F00E70E52 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		364996DA1E1E757F00E70E52 /* RequestParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestParameters.swift; sourceTree = "<group>"; };
 		364996E71E1E75CB00E70E52 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		364996EA1E1E768900E70E52 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 				364996D11E1E757F00E70E52 /* AuthorizationManager.swift */,
 				364996D21E1E757F00E70E52 /* AuthorizationType.swift */,
 				364996D81E1E757F00E70E52 /* OAuth2Handler.swift */,
-				364996D91E1E757F00E70E52 /* OAuth2Router.swift */,
+				364996D91E1E757F00E70E52 /* Router.swift */,
 				364996DA1E1E757F00E70E52 /* RequestParameters.swift */,
 			);
 			path = API;
@@ -522,7 +522,7 @@
 				364996DC1E1E757F00E70E52 /* AuthorizationManager.swift in Sources */,
 				364996DF1E1E757F00E70E52 /* Health.swift in Sources */,
 				364996E21E1E757F00E70E52 /* OAuth2Handler.swift in Sources */,
-				364996E31E1E757F00E70E52 /* OAuth2Router.swift in Sources */,
+				364996E31E1E757F00E70E52 /* Router.swift in Sources */,
 				36CFAB0F1E27B875002962A1 /* ApiError.swift in Sources */,
 				364996E81E1E75CB00E70E52 /* ViewController.swift in Sources */,
 				364996DB1E1E757F00E70E52 /* API.swift in Sources */,
