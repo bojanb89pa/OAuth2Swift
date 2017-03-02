@@ -8,9 +8,9 @@
 import Foundation
 import Alamofire
 
-public class AuthorizationManager {
+public class AuthManager {
     
-    static let sharedManager = AuthorizationManager()
+    static let sharedManager = AuthManager()
     
     static let AUTH_BASIC = "Basic"
     static let AUTH_BEARER = "Bearer"
@@ -63,12 +63,12 @@ public class AuthorizationManager {
         }
     }
     
-    func getAuthorization(forType: AuthorizationType) -> String {
+    func getAuthorization(forType: AuthType) -> String {
         var authString : String = ""
         switch (forType) {
-        case AuthorizationType.ClientAuthorization:
+        case AuthType.ClientAuthorization:
             authString = getClientAuthorization()
-        case AuthorizationType.TokenAuthorization:
+        case AuthType.TokenAuthorization:
             if(oauth2Token?.accessToken != nil && oauth2Token?.refreshToken != nil) {
                 authString = getTokenAuthorization()
             }
@@ -81,7 +81,7 @@ public class AuthorizationManager {
     
     func getClientAuthorization () -> String {
         let base64str = "\(getClientName()):\(getClientSecret())".toBase64()
-        return "\(AuthorizationManager.AUTH_BASIC) \(base64str)"
+        return "\(AuthManager.AUTH_BASIC) \(base64str)"
     }
     
     func getTokenAuthorization () -> String {
@@ -90,6 +90,6 @@ public class AuthorizationManager {
             token = oauth2Token?.refreshToken
         }
         
-        return "\(AuthorizationManager.AUTH_BEARER) \(token!)"
+        return "\(AuthManager.AUTH_BEARER) \(token!)"
     }
 }

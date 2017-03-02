@@ -65,30 +65,30 @@ public enum Router: URLRequestConvertible {
     ///
     /// - returns: A URL request.
     public func asURLRequest() throws -> URLRequest {
-        let result: (parameters: RequestParameters?, authorization : AuthorizationType) = {
+        let result: (parameters: RequestParameters?, authorization : AuthType) = {
             var params : [String: Any]? = nil
             var encoding : ParameterEncoding? = nil
-            var authType : AuthorizationType? = AuthorizationType.TokenAuthorization
+            var authType : AuthType? = AuthType.TokenAuthorization
             
             switch self {
                 
             case .Health():
-                authType = AuthorizationType.NoAuthorization
+                authType = AuthType.NoAuthorization
                 
             case .Login(let username, let password):
                 params = ["username" : username, "password" : password, "grant_type" : "password"]
                 encoding = Alamofire.URLEncoding.queryString
-                authType = AuthorizationType.ClientAuthorization
+                authType = AuthType.ClientAuthorization
                 
             case .Refresh():
-                let refreshToken = AuthorizationManager.sharedManager.oauth2Token?.refreshToken
+                let refreshToken = AuthManager.sharedManager.oauth2Token?.refreshToken
                 params = ["refresh_token" : refreshToken!, "grant_type" : "refresh_token"]
                 encoding = Alamofire.URLEncoding.queryString
-                authType = AuthorizationType.ClientAuthorization
+                authType = AuthType.ClientAuthorization
                 
             case .Signup(let user):
                 params = user.toDict()
-                authType = AuthorizationType.NoAuthorization
+                authType = AuthType.NoAuthorization
                 
             case .GetUser(let username):
                 params = ["username" : username]
@@ -103,9 +103,9 @@ public enum Router: URLRequestConvertible {
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
         
-        let authorizationValue : String = AuthorizationManager.sharedManager.getAuthorization(forType: result.authorization)
+        let authorizationValue : String = AuthManager.sharedManager.getAuthorization(forType: result.authorization)
         if(authorizationValue != "") {
-            urlRequest.setValue(authorizationValue, forHTTPHeaderField: AuthorizationManager.HEADER_AUTH)
+            urlRequest.setValue(authorizationValue, forHTTPHeaderField: AuthManager.HEADER_AUTH)
         }
         
         urlRequest.timeoutInterval = Router.timeoutInterval

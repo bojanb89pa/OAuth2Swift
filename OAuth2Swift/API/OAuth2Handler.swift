@@ -29,10 +29,10 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         if (urlRequest.url != nil) {
             var urlRequest = urlRequest
-            if (urlRequest.allHTTPHeaderFields?.keys.contains(AuthorizationManager.HEADER_AUTH))! {
-                let headerAuthorization : String = urlRequest.value(forHTTPHeaderField: AuthorizationManager.HEADER_AUTH)!
-                if headerAuthorization.hasPrefix(AuthorizationManager.AUTH_BEARER), !headerAuthorization.hasSuffix((AuthorizationManager.sharedManager.oauth2Token?.accessToken)!){
-                    urlRequest.setValue((AuthorizationManager.sharedManager.getTokenAuthorization()), forHTTPHeaderField: AuthorizationManager.HEADER_AUTH)
+            if (urlRequest.allHTTPHeaderFields?.keys.contains(AuthManager.HEADER_AUTH))! {
+                let headerAuthorization : String = urlRequest.value(forHTTPHeaderField: AuthManager.HEADER_AUTH)!
+                if headerAuthorization.hasPrefix(AuthManager.AUTH_BEARER), !headerAuthorization.hasSuffix((AuthManager.sharedManager.oauth2Token?.accessToken)!){
+                    urlRequest.setValue((AuthManager.sharedManager.getTokenAuthorization()), forHTTPHeaderField: AuthManager.HEADER_AUTH)
                 }
             }
             return urlRequest
@@ -48,9 +48,9 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
         
         var shouldRetry = false
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
-            if (request.request?.allHTTPHeaderFields?.keys.contains(AuthorizationManager.HEADER_AUTH))! {
-                let headerAuthorization : String = (request.request?.value(forHTTPHeaderField: AuthorizationManager.HEADER_AUTH))!
-                if headerAuthorization.hasPrefix(AuthorizationManager.AUTH_BEARER){
+            if (request.request?.allHTTPHeaderFields?.keys.contains(AuthManager.HEADER_AUTH))! {
+                let headerAuthorization : String = (request.request?.value(forHTTPHeaderField: AuthManager.HEADER_AUTH))!
+                if headerAuthorization.hasPrefix(AuthManager.AUTH_BEARER){
                     requestsToRetry.append(completion)
                     shouldRetry = true
                     if !isRefreshing {
@@ -77,7 +77,7 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
         guard !isRefreshing else { return }
 
         isRefreshing = true
-        if(AuthorizationManager.sharedManager.oauth2Token?.refreshToken != nil) {
+        if(AuthManager.sharedManager.oauth2Token?.refreshToken != nil) {
             sessionManager.request(Router.Refresh()).responseObject{ [weak self] (response:DataResponse<OAuth2Token>) in
                 guard let strongSelf = self else { return }
                 
@@ -98,7 +98,7 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
                 }
                 print("Is token expired: \(oauth2Token?.isExpired())")
                 
-                AuthorizationManager.sharedManager.oauth2Token = oauth2Token
+                AuthManager.sharedManager.oauth2Token = oauth2Token
                 
                 if(oauth2Token?.accessToken != nil) {
                     completion(true)

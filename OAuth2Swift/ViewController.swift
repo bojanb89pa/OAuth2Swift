@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func logout(_ sender: Any) {
-        AuthorizationManager.sharedManager.oauth2Token = nil
+        AuthManager.sharedManager.oauth2Token = nil
         self.showMessage("Access token removed!")
     }
     
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
                 
                 print("Is token expired: \(oauth2Token.isExpired())")
                 
-                AuthorizationManager.sharedManager.oauth2Token = oauth2Token
+                AuthManager.sharedManager.oauth2Token = oauth2Token
         }
     }
     
