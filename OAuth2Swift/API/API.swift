@@ -20,6 +20,8 @@ class API: NSObject {
         return SessionManager(configuration: configuration)
     }()
     
+    // MARK: - Requests
+    
     static public func request(_ urlRequest: URLRequestConvertible, viewController: UIViewController? = nil) -> DataRequest {
         
         sessionManager.retrier = OAuth2Handler()
@@ -60,7 +62,44 @@ class API: NSObject {
         }
     }
     
+    // MARK: - Upload multipart form data with body parts
     
+    
+    typealias UploadCompletion = (_ uploadRequest: UploadRequest) -> Void
+    
+    class public func upload( _ urlRequest: URLRequestConvertible, uploadFileUrl : URL, bodyPartParams: [String: Any]? = nil, viewController: UIViewController? = nil, completionHandler: @escaping UploadCompletion) {
+        
+        sessionManager.retrier = OAuth2Handler()
+        sessionManager.adapter = OAuth2Handler()
+        
+        sessionManager.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(uploadFileUrl, withName: "file")
+            
+            if let partParameters = bodyPartParams {
+                for (key, value) in partParameters {
+                    if let valueData = "\(value)".data(using: .utf8) {
+                        multipartFormData.append(valueData, withName: key)
+                    }
+                }
+            }
+        }, with: urlRequest) { (encodingResult) in
+            switch encodingResult {
+                
+            case .success(let upload, _, _):
+                upload.validate()
+                completionHandler(upload)
+            case .failure(let encodingError):
+                print(encodingError)
+                if let vc = viewController {
+                    showError(vc)
+                }
+            }
+        }
+    }
+    
+    
+    
+    // MARK: - Messages
     
     static private func showError(_ viewController: UIViewController, _ localizedError : String? = nil) {
         var message = NSLocalizedString("error.DEFAULT_ERROR", value: "Error occurred!", comment: "DEFAULT_ERROR")
