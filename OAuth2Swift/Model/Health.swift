@@ -1,8 +1,9 @@
 //
-//  CheckResponse.swift
-//  OAuth2Swiftn//
-//  Created by Bojan Bogojevic on 1/4/17.
-//  Copyright © 2017 Gecko Solutions. All rights reserved.
+//  Health.swift
+//  OAuth2Swift
+//
+//  Created by Bojan Bogojevic on 8/15/18.
+//  Copyright © 2018 Gecko Solutions. All rights reserved.
 //
 
 import UIKit
