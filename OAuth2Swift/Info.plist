@@ -42,9 +42,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>SERVER_URL</key>
-	<string>http://172.25.101.57:8080/oauth2</string>
+	<string>REPLACE_ME</string>
 	<key>SERVER_URL_DEBUG</key>
-	<string>http://172.25.101.57:8080/oauth2</string>
+	<string>http://172.25.101.57:8080</string>
 	<key>clientName</key>
 	<string>test_client</string>
 	<key>clientSecret</key>

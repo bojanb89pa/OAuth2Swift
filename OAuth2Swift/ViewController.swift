@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func checkServer(_ sender: Any) {
-        API.request(Router.Health(), viewController:self)
+        API.request(Router.health, viewController:self)
             .responseObject { (response :DataResponse<Health>) in
                 if response.result.isSuccess {
                     if let status = response.result.value?.status {
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func logout(_ sender: Any) {
-        AuthManager.sharedManager.oauth2Token = nil
+        AuthManager.shared.oauth2Token = nil
         self.showMessage("Access token removed!")
     }
     
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         let email = "test@mailinator.com"
         let password = "test123"
         
-        API.request(Router.Signup(user: User(username: username, email: email, password: password)), viewController: self)
+        API.request(Router.signup(user: User(username: username, email: email, password: password)), viewController: self)
             .responseData {response in
                 if response.result.isSuccess {
                     self.login(username, password)
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         
         let username = "test"
         
-        API.request(Router.GetUser(username: username), viewController:self)
+        API.request(Router.getUser(username: username), viewController:self)
             .responseObject { (response: DataResponse<User>) in
                 if response.result.isSuccess {
                     if let user = response.result.value {
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
     }
     
     func login(_ username: String, _ password: String) {
-        API.request(Router.Login(username: username, password: password), viewController:self)
+        API.request(Router.login(username: username, password: password), viewController:self)
             .responseObject { (response: DataResponse<OAuth2Token>) in
                 
                 guard let oauth2Token = response.result.value as OAuth2Token? else {
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
                 
                 print("Is token expired: \(oauth2Token.isExpired())")
                 
-                AuthManager.sharedManager.oauth2Token = oauth2Token
+                AuthManager.shared.oauth2Token = oauth2Token
         }
     }
     

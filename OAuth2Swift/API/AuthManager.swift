@@ -1,19 +1,18 @@
 //
-//  Authorization.swift
-//  OAuth2Swiftn//
-//  Created by Bojan Bogojevic on 11/4/16.
-//  Copyright © 2016 Gecko Solutions. All rights reserved.
+//  AuthManager.swift
+//  OAuth2Swift
 //
+//  Created by Bojan Bogojevic on 8/15/18.
+//  Copyright © 2018 Gecko Solutions. All rights reserved.
+//
+
 
 import Foundation
 import Alamofire
 
 public class AuthManager {
     
-    static let sharedManager = AuthManager()
-    
-    static let AUTH_BASIC = "Basic"
-    static let AUTH_BEARER = "Bearer"
+    static let shared = AuthManager()
     
     static let HEADER_AUTH = "Authorization"
     
@@ -23,24 +22,29 @@ public class AuthManager {
     /// Reading client name from Info.plist
     ///
     /// - returns: client name for OAuth 2.0 authentication
-    private func getClientName () -> String {
-        let plistPath = Bundle.main.path(forResource: "Info", ofType: "plist")! as String
-        let dict = NSDictionary(contentsOfFile: plistPath)
-        
-        return dict!.object(forKey: "clientName") as! String
+    static var clientName: String {
+        get {
+            let plistPath = Bundle.main.path(forResource: "Info", ofType: "plist")! as String
+            let dict = NSDictionary(contentsOfFile: plistPath)
+            
+            return dict!.object(forKey: "clientName") as! String
+        }
     }
     
     /// Reading client secret from Info.plist
     ///
     /// - returns: client secret for OAuth 2.0 authentication
-    private func getClientSecret () -> String {
-        let plistPath = Bundle.main.path(forResource: "Info", ofType: "plist")! as String
-        let dict = NSDictionary(contentsOfFile: plistPath)
-        
-        return dict!.object(forKey: "clientSecret") as! String
+    static var clientSecret: String {
+        get {
+            let plistPath = Bundle.main.path(forResource: "Info", ofType: "plist")! as String
+            let dict = NSDictionary(contentsOfFile: plistPath)
+            
+            return dict!.object(forKey: "clientSecret") as! String
+        }
     }
     
     
+    // TODO: Store OAuth2 token in Keychain
     private var _oauth2Token : OAuth2Token?
     
     var oauth2Token : OAuth2Token? {
@@ -62,34 +66,5 @@ public class AuthManager {
             defaults.set(jsonString, forKey: "oauth2Token")
         }
     }
-    
-    func getAuthorization(forType: AuthType) -> String {
-        var authString : String = ""
-        switch (forType) {
-        case AuthType.ClientAuthorization:
-            authString = getClientAuthorization()
-        case AuthType.TokenAuthorization:
-            if(oauth2Token?.accessToken != nil && oauth2Token?.refreshToken != nil) {
-                authString = getTokenAuthorization()
-            }
-        default:
-            authString = ""
-            
-        }
-        return authString
-    }
-    
-    func getClientAuthorization () -> String {
-        let base64str = "\(getClientName()):\(getClientSecret())".toBase64()
-        return "\(AuthManager.AUTH_BASIC) \(base64str)"
-    }
-    
-    func getTokenAuthorization () -> String {
-        var token = oauth2Token?.accessToken
-        if ((oauth2Token?.isExpired())! || token == nil) {
-            token = oauth2Token?.refreshToken
-        }
-        
-        return "\(AuthManager.AUTH_BEARER) \(token!)"
-    }
+
 }

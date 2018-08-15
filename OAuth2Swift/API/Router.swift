@@ -1,9 +1,11 @@
 //
 //  Router.swift
-//  OAuth2Swiftn//
-//  Created by Bojan Bogojevic on 11/3/16.
-//  Copyright © 2016 Gecko Solutions. All rights reserved.
+//  OAuth2Swift
 //
+//  Created by Bojan Bogojevic on 8/15/18.
+//  Copyright © 2018 Gecko Solutions. All rights reserved.
+//
+
 
 import Foundation
 import Alamofire
@@ -16,43 +18,47 @@ public enum Router: URLRequestConvertible {
     /// Reading server URL from Info.plist
     ///
     /// - returns: base server URL
-    private func getServerUrl () -> String {
-        let plistPath = Bundle.main.path(forResource: "Info", ofType: "plist")! as String
-        let dict = NSDictionary(contentsOfFile: plistPath)
-        #if DEBUG
+    private var serverUrl: URL {
+        get {
+            let plistPath = Bundle.main.path(forResource: "Info", ofType: "plist")! as String
+            let dict = NSDictionary(contentsOfFile: plistPath)
+            #if DEBUG
             let serverUrlKey = "SERVER_URL_DEBUG"
-        #else
+            #else
             let serverUrlKey = "SERVER_URL"
-        #endif
-        return dict!.object(forKey: serverUrlKey) as! String
+            #endif
+            let serverUrlString = dict!.object(forKey: serverUrlKey) as! String
+            return (URL(string: serverUrlString))!
+        }
     }
     
     // MARK: route names:
     
-    case Health()
-    case Login(username: String, password: String)
-    case Refresh()
-    case Signup(user: User)
-    case GetUser(username: String)
+    case health
+    case login(username: String, password: String)
+    case refresh()
+    case signup(user: User)
+    case getUser(username: String)
+    
     
     var path: String {
         switch self {
-        case .Health:
-            return "/health"
-        case .Login, .Refresh:
-            return "/oauth/token"
-        case .Signup:
-            return "/signup"
-        case .GetUser:
-            return "/user"
+        case .health:
+            return "health"
+        case .login, .refresh:
+            return "oauth/token"
+        case .signup:
+            return "signup"
+        case .getUser:
+            return "user"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .Health, .GetUser:
+        case .health, .getUser:
             return .get
-        case .Login, .Refresh, .Signup:
+        case .login, .refresh, .signup:
             return .post
         }
     }
@@ -65,61 +71,59 @@ public enum Router: URLRequestConvertible {
     ///
     /// - returns: A URL request.
     public func asURLRequest() throws -> URLRequest {
-        let result: (parameters: RequestParameters?, authorization : AuthType) = {
+        let result: (parameters: [String: Any]?, encoding: ParameterEncoding?, authorization : AuthorizationType) = {
             var params : [String: Any]? = nil
             var encoding : ParameterEncoding? = nil
-            var authType : AuthType? = AuthType.TokenAuthorization
+            var authType : AuthorizationType = .bearer(oauth2Token: AuthManager.shared.oauth2Token)
             
             switch self {
                 
-            case .Health():
-                authType = AuthType.NoAuthorization
+            case .health():
+                authType = .none
                 
-            case .Login(let username, let password):
+            case .login(let username, let password):
                 params = ["username" : username, "password" : password, "grant_type" : "password"]
                 encoding = Alamofire.URLEncoding.queryString
-                authType = AuthType.ClientAuthorization
+                authType = .basic(username: AuthManager.clientName, password: AuthManager.clientSecret)
                 
-            case .Refresh():
-                let refreshToken = AuthManager.sharedManager.oauth2Token?.refreshToken
+            case .refresh():
+                let refreshToken = AuthManager.shared.oauth2Token?.refreshToken
                 params = ["refresh_token" : refreshToken!, "grant_type" : "refresh_token"]
                 encoding = Alamofire.URLEncoding.queryString
-                authType = AuthType.ClientAuthorization
+                authType = .basic(username: AuthManager.clientName, password: AuthManager.clientSecret)
                 
-            case .Signup(let user):
-                params = user.toDict()
-                authType = AuthType.NoAuthorization
+            case .signup(let user):
+                params = user.toJSON()
+                authType = .none
                 
-            case .GetUser(let username):
+            case .getUser(let username):
                 params = ["username" : username]
                 
+            
             }
             
-            return (RequestParameters(parameters: params, encoding:encoding), authType!)
+            return (parameters: params, encoding:encoding, authType)
         }()
         
-        
-        let url = URL(string: getServerUrl())!
-        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+        var urlRequest = URLRequest(url: serverUrl.appendingPathComponent("\(path)"))
         urlRequest.httpMethod = method.rawValue
         
-        let authorizationValue : String = AuthManager.sharedManager.getAuthorization(forType: result.authorization)
+        let authorizationValue : String = result.authorization.authorizationHeader
         if(authorizationValue != "") {
             urlRequest.setValue(authorizationValue, forHTTPHeaderField: AuthManager.HEADER_AUTH)
         }
         
         urlRequest.timeoutInterval = Router.timeoutInterval
         
-        return try addParamsToRequest(urlRequest: urlRequest, requestParams: result.parameters, method: method)
+        return try addParamsToRequest(urlRequest: urlRequest, requestParams: result.parameters,  encoding: result.encoding, method: method)
         
     }
     
-    
     // MARK: adding parameters
     
-    private func addParamsToRequest(urlRequest: URLRequest, requestParams : RequestParameters?, method: Alamofire.HTTPMethod) throws -> URLRequest {
-        if let param = requestParams?.parameters {
-            var urlEncoding = requestParams?.encoding
+    private func addParamsToRequest(urlRequest: URLRequest, requestParams : [String: Any]?, encoding: ParameterEncoding?, method: Alamofire.HTTPMethod) throws -> URLRequest {
+        if let param = requestParams {
+            var urlEncoding = encoding
             if urlEncoding == nil {
                 switch method {
                 case .get, .delete:
@@ -134,6 +138,5 @@ public enum Router: URLRequestConvertible {
         }
     }
     
+    
 }
-
-

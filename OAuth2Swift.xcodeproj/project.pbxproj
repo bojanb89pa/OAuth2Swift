@@ -14,19 +14,19 @@
 		364996AC1E1E6E4600E70E52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 364996AA1E1E6E4600E70E52 /* LaunchScreen.storyboard */; };
 		364996B71E1E6E4600E70E52 /* OAuth2SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996B61E1E6E4600E70E52 /* OAuth2SwiftTests.swift */; };
 		364996C21E1E6E4600E70E52 /* OAuth2SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996C11E1E6E4600E70E52 /* OAuth2SwiftUITests.swift */; };
-		364996DB1E1E757F00E70E52 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D01E1E757F00E70E52 /* API.swift */; };
-		364996DC1E1E757F00E70E52 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D11E1E757F00E70E52 /* AuthManager.swift */; };
-		364996DD1E1E757F00E70E52 /* AuthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D21E1E757F00E70E52 /* AuthType.swift */; };
 		364996DE1E1E757F00E70E52 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D41E1E757F00E70E52 /* BaseModel.swift */; };
 		364996DF1E1E757F00E70E52 /* Health.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D51E1E757F00E70E52 /* Health.swift */; };
 		364996E01E1E757F00E70E52 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D61E1E757F00E70E52 /* User.swift */; };
 		364996E11E1E757F00E70E52 /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D71E1E757F00E70E52 /* OAuth2Token.swift */; };
-		364996E21E1E757F00E70E52 /* OAuth2Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D81E1E757F00E70E52 /* OAuth2Handler.swift */; };
-		364996E31E1E757F00E70E52 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996D91E1E757F00E70E52 /* Router.swift */; };
-		364996E41E1E757F00E70E52 /* RequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996DA1E1E757F00E70E52 /* RequestParameters.swift */; };
 		364996E81E1E75CB00E70E52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996E71E1E75CB00E70E52 /* ViewController.swift */; };
 		364996EB1E1E768900E70E52 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996EA1E1E768900E70E52 /* StringUtils.swift */; };
 		368153591E3A01DA00BB3D3A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 368153581E3A01DA00BB3D3A /* Localizable.strings */; };
+		36C89A9E212470FB004ABF03 /* DebugConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89A98212470FB004ABF03 /* DebugConfig.swift */; };
+		36C89A9F212470FB004ABF03 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89A99212470FB004ABF03 /* Router.swift */; };
+		36C89AA0212470FB004ABF03 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89A9A212470FB004ABF03 /* AuthManager.swift */; };
+		36C89AA1212470FB004ABF03 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89A9B212470FB004ABF03 /* API.swift */; };
+		36C89AA2212470FB004ABF03 /* OAuth2Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89A9C212470FB004ABF03 /* OAuth2Handler.swift */; };
+		36C89AA3212470FB004ABF03 /* AuthorizationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89A9D212470FB004ABF03 /* AuthorizationType.swift */; };
 		36CFAB0F1E27B875002962A1 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CFAB0E1E27B875002962A1 /* ApiError.swift */; };
 		36E8479C1E53428200498963 /* ViewControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E8479B1E53428200498963 /* ViewControllerUtils.swift */; };
 		7830C9C9BCFA97339E6E7856 /* Pods_OAuth2Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0360EEC60CC2D1FDAC4A8B3A /* Pods_OAuth2Swift.framework */; };
@@ -66,19 +66,19 @@
 		364996BD1E1E6E4600E70E52 /* OAuth2SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OAuth2SwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		364996C11E1E6E4600E70E52 /* OAuth2SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2SwiftUITests.swift; sourceTree = "<group>"; };
 		364996C31E1E6E4600E70E52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		364996D01E1E757F00E70E52 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		364996D11E1E757F00E70E52 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		364996D21E1E757F00E70E52 /* AuthType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthType.swift; sourceTree = "<group>"; };
 		364996D41E1E757F00E70E52 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		364996D51E1E757F00E70E52 /* Health.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Health.swift; sourceTree = "<group>"; };
 		364996D61E1E757F00E70E52 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		364996D71E1E757F00E70E52 /* OAuth2Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
-		364996D81E1E757F00E70E52 /* OAuth2Handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Handler.swift; sourceTree = "<group>"; };
-		364996D91E1E757F00E70E52 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		364996DA1E1E757F00E70E52 /* RequestParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestParameters.swift; sourceTree = "<group>"; };
 		364996E71E1E75CB00E70E52 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		364996EA1E1E768900E70E52 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
 		368153581E3A01DA00BB3D3A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		36C89A98212470FB004ABF03 /* DebugConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugConfig.swift; sourceTree = "<group>"; };
+		36C89A99212470FB004ABF03 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		36C89A9A212470FB004ABF03 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		36C89A9B212470FB004ABF03 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		36C89A9C212470FB004ABF03 /* OAuth2Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Handler.swift; sourceTree = "<group>"; };
+		36C89A9D212470FB004ABF03 /* AuthorizationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationType.swift; sourceTree = "<group>"; };
 		36CFAB0E1E27B875002962A1 /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		36E8479B1E53428200498963 /* ViewControllerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerUtils.swift; sourceTree = "<group>"; };
 		3FB3E14B45792FCCB038730C /* Pods-OAuth2SwiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAuth2SwiftUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OAuth2SwiftUITests/Pods-OAuth2SwiftUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -177,12 +177,12 @@
 			isa = PBXGroup;
 			children = (
 				364996D31E1E757F00E70E52 /* Model */,
-				364996D01E1E757F00E70E52 /* API.swift */,
-				364996D11E1E757F00E70E52 /* AuthManager.swift */,
-				364996D21E1E757F00E70E52 /* AuthType.swift */,
-				364996D81E1E757F00E70E52 /* OAuth2Handler.swift */,
-				364996D91E1E757F00E70E52 /* Router.swift */,
-				364996DA1E1E757F00E70E52 /* RequestParameters.swift */,
+				36C89A98212470FB004ABF03 /* DebugConfig.swift */,
+				36C89A99212470FB004ABF03 /* Router.swift */,
+				36C89A9A212470FB004ABF03 /* AuthManager.swift */,
+				36C89A9B212470FB004ABF03 /* API.swift */,
+				36C89A9C212470FB004ABF03 /* OAuth2Handler.swift */,
+				36C89A9D212470FB004ABF03 /* AuthorizationType.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -516,20 +516,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36C89A9F212470FB004ABF03 /* Router.swift in Sources */,
+				36C89AA0212470FB004ABF03 /* AuthManager.swift in Sources */,
 				364996E11E1E757F00E70E52 /* OAuth2Token.swift in Sources */,
+				36C89A9E212470FB004ABF03 /* DebugConfig.swift in Sources */,
+				36C89AA3212470FB004ABF03 /* AuthorizationType.swift in Sources */,
 				364996EB1E1E768900E70E52 /* StringUtils.swift in Sources */,
 				364996DE1E1E757F00E70E52 /* BaseModel.swift in Sources */,
-				364996DC1E1E757F00E70E52 /* AuthManager.swift in Sources */,
 				364996DF1E1E757F00E70E52 /* Health.swift in Sources */,
-				364996E21E1E757F00E70E52 /* OAuth2Handler.swift in Sources */,
-				364996E31E1E757F00E70E52 /* Router.swift in Sources */,
+				36C89AA2212470FB004ABF03 /* OAuth2Handler.swift in Sources */,
 				36CFAB0F1E27B875002962A1 /* ApiError.swift in Sources */,
+				36C89AA1212470FB004ABF03 /* API.swift in Sources */,
 				364996E81E1E75CB00E70E52 /* ViewController.swift in Sources */,
-				364996DB1E1E757F00E70E52 /* API.swift in Sources */,
 				364996A21E1E6E4600E70E52 /* AppDelegate.swift in Sources */,
 				364996E01E1E757F00E70E52 /* User.swift in Sources */,
-				364996DD1E1E757F00E70E52 /* AuthType.swift in Sources */,
-				364996E41E1E757F00E70E52 /* RequestParameters.swift in Sources */,
 				36E8479C1E53428200498963 /* ViewControllerUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

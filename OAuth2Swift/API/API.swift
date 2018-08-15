@@ -2,8 +2,8 @@
 //  API.swift
 //  OAuth2Swift
 //
-//  Created by Bojan Bogojevic on 11/7/16.
-//  Copyright © 2016 Gecko Solutions. All rights reserved.
+//  Created by Bojan Bogojevic on 8/15/18.
+//  Copyright © 2018 Gecko Solutions. All rights reserved.
 //
 
 import UIKit
