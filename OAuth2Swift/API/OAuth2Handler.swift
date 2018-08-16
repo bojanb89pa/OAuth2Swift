@@ -89,7 +89,7 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
         
         isRefreshing = true
         if(AuthManager.oauth2Token?.refreshToken != nil) {
-            sessionManager.request(Router.refresh()).debugLog().responseObject{ [weak self] (response: DataResponse<OAuth2Token>) in
+            sessionManager.request(Router.refresh).debugLog().responseObject{ [weak self] (response: DataResponse<OAuth2Token>) in
                 guard let strongSelf = self else { return }
                 
                 guard let _ = response.result.value else {

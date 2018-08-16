@@ -36,7 +36,7 @@ public enum Router: URLRequestConvertible {
     
     case health
     case login(username: String, password: String)
-    case refresh()
+    case refresh
     case signup(user: User)
     case getUser(username: String)
     
@@ -78,7 +78,7 @@ public enum Router: URLRequestConvertible {
             
             switch self {
                 
-            case .health():
+            case .health:
                 authType = .none
                 
             case .login(let username, let password):
@@ -87,7 +87,7 @@ public enum Router: URLRequestConvertible {
                 encoding = Alamofire.URLEncoding.queryString
                 authType = .basic(username: AuthManager.clientName, password: AuthManager.clientSecret)
                 
-            case .refresh():
+            case .refresh:
                 let refreshToken = AuthManager.oauth2Token?.refreshToken
                 params = ["refresh_token" : refreshToken!, "grant_type" : "refresh_token"]
                 encoding = Alamofire.URLEncoding.queryString
