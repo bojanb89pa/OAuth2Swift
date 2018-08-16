@@ -47,7 +47,8 @@ class OAuth2SwiftTests: XCTestCase {
     }
     
     func testLogout() {
-        AuthManager.shared.oauth2Token = nil
+        AuthManager.oauth2Token = nil
+        AuthManager.currentUser = nil
     }
     
     func testFakeToken() {
@@ -56,7 +57,7 @@ class OAuth2SwiftTests: XCTestCase {
         token.refreshToken = "fakeRefreshToken"
         
         token.expirationDate = Date(timeInterval: 1000, since: Date())
-        AuthManager.shared.oauth2Token = token
+        AuthManager.oauth2Token = token
     }
     
     
@@ -90,7 +91,7 @@ class OAuth2SwiftTests: XCTestCase {
                 
                 print("Is token expired: \(oauth2Token?.isExpired() == true)")
                 
-                AuthManager.shared.oauth2Token = oauth2Token
+                AuthManager.oauth2Token = oauth2Token
                 
                 expectationCheck.fulfill()
                 
@@ -149,7 +150,7 @@ class OAuth2SwiftTests: XCTestCase {
                             
                             print("Is token expired: \(oauth2Token?.isExpired() == true)")
                             
-                            AuthManager.shared.oauth2Token = oauth2Token
+                            AuthManager.oauth2Token = oauth2Token
                             
                             expectationCheck.fulfill()
                             

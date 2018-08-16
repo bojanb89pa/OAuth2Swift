@@ -35,8 +35,8 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
             var urlRequest = urlRequest
             if (urlRequest.allHTTPHeaderFields?.keys.contains(AuthManager.HEADER_AUTH))! {
                 let headerAuthorization : String = urlRequest.value(forHTTPHeaderField: AuthManager.HEADER_AUTH)!
-                if headerAuthorization.hasPrefix(AuthorizationType.bearer(oauth2Token: nil).authPrefix), let accessToken = AuthManager.shared.oauth2Token?.accessToken, !headerAuthorization.hasSuffix(accessToken){
-                    urlRequest.setValue((AuthorizationType.bearer(oauth2Token: AuthManager.shared.oauth2Token).authorizationHeader), forHTTPHeaderField: AuthManager.HEADER_AUTH)
+                if headerAuthorization.hasPrefix(AuthorizationType.bearer(oauth2Token: nil).authPrefix), let accessToken = AuthManager.oauth2Token?.accessToken, !headerAuthorization.hasSuffix(accessToken){
+                    urlRequest.setValue((AuthorizationType.bearer(oauth2Token: AuthManager.oauth2Token).authorizationHeader), forHTTPHeaderField: AuthManager.HEADER_AUTH)
                 }
             }
             return urlRequest
@@ -88,7 +88,7 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
         guard !isRefreshing else { return }
         
         isRefreshing = true
-        if(AuthManager.shared.oauth2Token?.refreshToken != nil) {
+        if(AuthManager.oauth2Token?.refreshToken != nil) {
             sessionManager.request(Router.refresh()).debugLog().responseObject{ [weak self] (response: DataResponse<OAuth2Token>) in
                 guard let strongSelf = self else { return }
                 
@@ -103,7 +103,7 @@ class OAuth2Handler: RequestRetrier, RequestAdapter {
                 print("Status code: \(statusCode!)")
                 
                 if let oauth2Token = response.result.value {
-                    AuthManager.shared.oauth2Token = oauth2Token
+                    AuthManager.oauth2Token = oauth2Token
                     completion(true)
                 } else {
                     completion(false)

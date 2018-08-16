@@ -74,7 +74,7 @@ public enum Router: URLRequestConvertible {
         let result: (parameters: [String: Any]?, encoding: ParameterEncoding?, authorization : AuthorizationType) = {
             var params : [String: Any]? = nil
             var encoding : ParameterEncoding? = nil
-            var authType : AuthorizationType = .bearer(oauth2Token: AuthManager.shared.oauth2Token)
+            var authType : AuthorizationType = .bearer(oauth2Token: AuthManager.oauth2Token)
             
             switch self {
                 
@@ -82,12 +82,13 @@ public enum Router: URLRequestConvertible {
                 authType = .none
                 
             case .login(let username, let password):
+                AuthManager.currentUser = username
                 params = ["username" : username, "password" : password, "grant_type" : "password"]
                 encoding = Alamofire.URLEncoding.queryString
                 authType = .basic(username: AuthManager.clientName, password: AuthManager.clientSecret)
                 
             case .refresh():
-                let refreshToken = AuthManager.shared.oauth2Token?.refreshToken
+                let refreshToken = AuthManager.oauth2Token?.refreshToken
                 params = ["refresh_token" : refreshToken!, "grant_type" : "refresh_token"]
                 encoding = Alamofire.URLEncoding.queryString
                 authType = .basic(username: AuthManager.clientName, password: AuthManager.clientSecret)
