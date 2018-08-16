@@ -82,7 +82,7 @@ public enum Router: URLRequestConvertible {
                 authType = .none
                 
             case .login(let username, let password):
-                AuthManager.currentUser = username
+                AuthManager.currentAccount = username
                 params = ["username" : username, "password" : password, "grant_type" : "password"]
                 encoding = Alamofire.URLEncoding.queryString
                 authType = .basic(username: AuthManager.clientName, password: AuthManager.clientSecret)

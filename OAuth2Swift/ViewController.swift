@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     
     @IBAction func logout(_ sender: Any) {
         AuthManager.oauth2Token = nil
-        AuthManager.currentUser = nil
+        AuthManager.currentAccount = nil
         self.showMessage("Access token removed!")
     }
     

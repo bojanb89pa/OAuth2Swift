@@ -24,11 +24,11 @@ public class AuthManager {
     fileprivate static let defaults = UserDefaults.standard
     
     // Cache properties
-    fileprivate static var _currentUser : String?
+    fileprivate static var _currentAccount : String?
     fileprivate static var _oauth2Token : OAuth2Token?
     
     // Keys:
-    fileprivate static let KEY_CURRENT_USER = "AuthManager.CurrentUser"
+    fileprivate static let KEY_CURRENT_ACCOUNT = "AuthManager.CurrentAccount"
     
     /// Reading client name from Info.plist
     ///
@@ -55,17 +55,27 @@ public class AuthManager {
     }
     
     
-    static var currentUser: String? {           // username or user id
+    static var currentAccount: String? {           // username or user id
         get {
-            if(_currentUser == nil) {
-                _currentUser = defaults.string(forKey: KEY_CURRENT_USER)
+            if(_currentAccount == nil) {
+                _currentAccount = defaults.string(forKey: KEY_CURRENT_ACCOUNT)
             }
-            return _currentUser
+            return _currentAccount
         }
         set {
-            _currentUser = newValue
-            defaults.set(_currentUser, forKey: KEY_CURRENT_USER)
+            _currentAccount = newValue
+            defaults.set(_currentAccount, forKey: KEY_CURRENT_ACCOUNT)
             
+        }
+    }
+    
+    // if we use username for currentAccount and if we would like to rename this user,
+    // we should call this method to keep token data for this user
+    func updateAccountName(newAccountName: String) {
+        if let currentAccount = AuthManager.currentAccount, currentAccount != newAccountName {
+            
+        } else {
+            AuthManager.currentAccount = newAccountName
         }
     }
     
@@ -75,12 +85,10 @@ public class AuthManager {
             if(_oauth2Token == nil) {
                 
                 // If an account name has been set, read any existing password from the keychain.
-                if let accountName = currentUser {
+                if let accountName = currentAccount {
                     do {
-                        let passwordItem = KeychainTokenItem(service: KeychainConfiguration.serviceName, account: accountName, accessGroup: KeychainConfiguration.accessGroup)
-                        
-                        currentUser = passwordItem.account
-                        _oauth2Token = try passwordItem.readOAuth2Token()
+                        let tokenItem = KeychainTokenItem(service: KeychainConfiguration.serviceName, account: accountName, accessGroup: KeychainConfiguration.accessGroup)
+                        _oauth2Token = try tokenItem.readOAuth2Token()
                     }
                     catch {
                         fatalError("Error reading password from keychain - \(error)")
@@ -95,7 +103,7 @@ public class AuthManager {
             
             // Check if we need to update an existing item or create a new one.
             do {
-                if let accountName = currentUser {
+                if let accountName = currentAccount {
                     // Create a keychain item with the original account name.
                     let tokenItem = KeychainTokenItem(service: KeychainConfiguration.serviceName, account: accountName, accessGroup: KeychainConfiguration.accessGroup)
                     
