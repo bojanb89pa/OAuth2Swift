@@ -91,7 +91,7 @@ public class AuthManager {
                         _oauth2Token = try tokenItem.readOAuth2Token()
                     }
                     catch {
-                        fatalError("Error reading password from keychain - \(error)")
+                        print("Token wasn't read, reason - \(error)")
                     }
                 }
             }
