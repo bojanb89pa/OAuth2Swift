@@ -26,7 +26,7 @@ class API: NSObject {
         
         sessionManager.retrier = OAuth2Handler()
         sessionManager.adapter = OAuth2Handler()
-        return sessionManager.request(urlRequest).validate().responseData { response in
+        return sessionManager.request(urlRequest).validate().debugLog().responseData { response in
             switch response.result {
             case .success:
                 print("Validation Successful")
@@ -86,7 +86,7 @@ class API: NSObject {
             switch encodingResult {
                 
             case .success(let upload, _, _):
-                upload.validate()
+                let _ = upload.validate().debugLog()
                 completionHandler(upload)
             case .failure(let encodingError):
                 print(encodingError)
