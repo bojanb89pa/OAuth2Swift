@@ -1,5 +1,5 @@
-# OAuth2Swift (using Alamofire)
-Basic sample for standard OAuth 2.0 protocol (adapted for Spring security) written in Swift 4.2 using Alamofire.
+# OAuth2Swift (using Alamofire 5 + Swift 5)
+Basic sample for standard OAuth 2.0 protocol (adapted for Spring security) written in Swift 5 using Alamofire.
 
 Backend sample for this written in Java (Spring):
 https://github.com/bojanb89pa/OAuth2Spring. This is standard OAuth 2.0 use-case. It can be modified.
