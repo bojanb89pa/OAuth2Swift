@@ -102,9 +102,9 @@ class ViewController: UIViewController {
     // MARK: Messages
     func showMessage(_ message: String) {
         
-        let alertController = UIAlertController(title: "Message", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: "Message", message: message, preferredStyle: UIAlertController.Style.alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
             (result : UIAlertAction) -> Void in
             print("OK")
         }
