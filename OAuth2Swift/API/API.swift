@@ -13,20 +13,18 @@ import ObjectMapper
 
 class API: NSObject {
     
-    static let sessionManager: SessionManager = {
+    static let session: Session = {
         let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+//        configuration.httpAdditionalHeaders = Session.default
         
-        return SessionManager(configuration: configuration)
+        return Session(configuration: configuration, interceptor: OAuth2Handler)
     }()
     
     // MARK: - Requests
     
     static public func request(_ urlRequest: URLRequestConvertible, viewController: UIViewController? = nil) -> DataRequest {
         
-        sessionManager.retrier = OAuth2Handler()
-        sessionManager.adapter = OAuth2Handler()
-        return sessionManager.request(urlRequest).validate().debugLog().responseData { response in
+        return session.request(urlRequest).validate().debugLog().responseData { response in
             switch response.result {
             case .success:
                 print("Validation Successful")
@@ -69,10 +67,7 @@ class API: NSObject {
     
     class public func upload( _ urlRequest: URLRequestConvertible, uploadFileUrl : URL, bodyPartParams: [String: Any]? = nil, viewController: UIViewController? = nil, completionHandler: @escaping UploadCompletion) {
         
-        sessionManager.retrier = OAuth2Handler()
-        sessionManager.adapter = OAuth2Handler()
-        
-        sessionManager.upload(multipartFormData: { (multipartFormData) in
+        session.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(uploadFileUrl, withName: "file")
             
             if let partParameters = bodyPartParams {
@@ -101,7 +96,7 @@ class API: NSObject {
     
     // MARK: - Messages
     
-    static private func showError(_ viewController: UIViewController, _ localizedError : String? = nil) {
+    static public func showError(_ viewController: UIViewController, _ localizedError : String? = nil) {
         var message = NSLocalizedString("error.DEFAULT_ERROR", value: "Error occurred!", comment: "DEFAULT_ERROR")
         if let locError = localizedError {
             message = locError

@@ -25,10 +25,12 @@ class ViewController: UIViewController {
     @IBAction func checkServer(_ sender: Any) {
         API.request(Router.health, viewController:self)
             .responseObject { (response :DataResponse<Health>) in
-                if response.result.isSuccess {
-                    if let status = response.result.value?.status {
+                do {
+                    if let status = try response.result.get().status {
                         self.showMessage("Status: \(status)")
                     }
+                } catch _ {
+                    self.showMessage("Error occured")
                 }
         }
     }
@@ -52,8 +54,11 @@ class ViewController: UIViewController {
         
         API.request(Router.signup(user: User(username: username, email: email, password: password)), viewController: self)
             .responseData {response in
-                if response.result.isSuccess {
+                do {
+                    let _ = try response.result.get()
                     self.login(username, password)
+                } catch _ {
+                    API.showError(self)
                 }
         }
     
@@ -65,13 +70,14 @@ class ViewController: UIViewController {
         
         API.request(Router.getUser(username: username), viewController:self)
             .responseObject { (response: DataResponse<User>) in
-                if response.result.isSuccess {
-                    if let user = response.result.value {
-                        if let username = user.username,
-                            let email = user.email {
-                            self.showMessage("Username: \(username)\nemail: \(email)")
-                        }
+                do {
+                    let user = try response.result.get()
+                    if let username = user.username,
+                        let email = user.email {
+                        self.showMessage("Username: \(username)\nemail: \(email)")
                     }
+                } catch _ {
+                    API.showError(self)
                 }
         }
     }
@@ -79,23 +85,24 @@ class ViewController: UIViewController {
     func login(_ username: String, _ password: String) {
         API.request(Router.login(username: username, password: password), viewController:self)
             .responseObject { (response: DataResponse<OAuth2Token>) in
-                
-                guard let oauth2Token = response.result.value as OAuth2Token? else {
+                do {
+                    let oauth2Token = try response.result.get()
+                    
+                    if let accessToken = oauth2Token.accessToken {
+                        print("Access token \(accessToken)")
+                        self.showMessage("Access token: \(accessToken)")
+                    }
+                    if let refreshToken = oauth2Token.refreshToken {
+                        print("Refresh token \(refreshToken)")
+                    }
+                    
+                    print("Is token expired: \(oauth2Token.isExpired())")
+                    
+                    AuthManager.oauth2Token = oauth2Token
+                } catch _ {
                     print("Invalid information received from the service")
                     return
                 }
-                
-                if let accessToken = oauth2Token.accessToken {
-                    print("Access token \(accessToken)")
-                    self.showMessage("Access token: \(accessToken)")
-                }
-                if let refreshToken = oauth2Token.refreshToken {
-                    print("Refresh token \(refreshToken)")
-                }
-                
-                print("Is token expired: \(oauth2Token.isExpired())")
-                
-                AuthManager.oauth2Token = oauth2Token
         }
     }
     
