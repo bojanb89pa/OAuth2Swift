@@ -22,6 +22,22 @@ class API: NSObject {
     
     // MARK: - Requests
     
+    static public func requestObject<T:Mappable>(_ urlRequest: URLRequestConvertible, viewController: UIViewController? = nil, completion: @escaping (T) -> Void) {
+        request(urlRequest, viewController: viewController).responseObject { (response: DataResponse<T>) in
+            do {
+                let object = try response.result.get()
+                completion(object)
+            } catch _ {
+                print("Response parsing exception for class: \(T.self)")
+                
+                if let vc = viewController {
+                    showError(vc)
+                }
+            }
+        }
+    }
+    
+    
     static public func request(_ urlRequest: URLRequestConvertible, viewController: UIViewController? = nil) -> DataRequest {
         
         return session.request(urlRequest).validate().debugLog().responseData { response in
@@ -29,8 +45,14 @@ class API: NSObject {
             case .success:
                 print("Validation Successful")
             case .failure:
+                guard let data = response.data else {
+                    if let vc = viewController {
+                        showError(vc)
+                    }
+                    return
+                }
                 do {
-                    let apiErrorDict = try JSONSerialization.jsonObject(with: response.data!, options: .allowFragments) as! [String:Any]
+                    let apiErrorDict = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                     
                     
                     

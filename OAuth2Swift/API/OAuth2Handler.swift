@@ -26,31 +26,33 @@ struct OAuth2Handler: RequestInterceptor {
                     adaptedRequest.setValue((AuthorizationType.bearer(oauth2Token: AuthManager.oauth2Token).authorizationHeader), forHTTPHeaderField: AuthManager.HEADER_AUTH)
                 }
             }
-            completion(.success(adaptedRequest))
         }
         completion(.success(adaptedRequest))
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-        if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
-            if(AuthManager.oauth2Token?.refreshToken != nil) {
-                session.request(Router.refresh).debugLog().responseObject{ (response: DataResponse<OAuth2Token>) in
-                    
-                    let statusCode = response.response?.statusCode
-                    print("Status code: \(statusCode!)")
-                    
-                    do {
-                        let oauth2Token = try response.result.get()
-                        AuthManager.oauth2Token = oauth2Token
-                        completion(RetryResult.retry)
-                    } catch _ {
-                        completion(RetryResult.doNotRetry)
+        
+        if let response = request.task?.response as? HTTPURLResponse {
+            if response.statusCode == 401 {
+                if(AuthManager.oauth2Token?.refreshToken != nil) {
+                    session.request(Router.refresh).debugLog().responseObject{ (response: DataResponse<OAuth2Token>) in
+                        
+                        let statusCode = response.response?.statusCode
+                        print("Status code: \(statusCode!)")
+                        
+                        do {
+                            let oauth2Token = try response.result.get()
+                            AuthManager.oauth2Token = oauth2Token
+                            completion(.retry)
+                        } catch _ {
+                            completion(.doNotRetry)
+                        }
                     }
+                } else {
+                    completion(.doNotRetry)
                 }
-            } else {
-                DispatchQueue.global(qos: .userInitiated).async {
-                    completion(RetryResult.doNotRetry)
-                }
+            } else if response.statusCode >= 300 || response.statusCode < 200 {
+                completion(.doNotRetry)
             }
         }
     }

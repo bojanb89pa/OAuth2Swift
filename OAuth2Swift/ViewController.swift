@@ -23,15 +23,10 @@ class ViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func checkServer(_ sender: Any) {
-        API.request(Router.health, viewController:self)
-            .responseObject { (response :DataResponse<Health>) in
-                do {
-                    if let status = try response.result.get().status {
-                        self.showMessage("Status: \(status)")
-                    }
-                } catch _ {
-                    self.showMessage("Error occured")
-                }
+        API.requestObject(Router.health, viewController: self) { (health: Health) in
+            if let status = health.status {
+                self.showMessage("Status: \(status)")
+            }
         }
     }
     
@@ -68,41 +63,27 @@ class ViewController: UIViewController {
         
         let username = "test"
         
-        API.request(Router.getUser(username: username), viewController:self)
-            .responseObject { (response: DataResponse<User>) in
-                do {
-                    let user = try response.result.get()
-                    if let username = user.username,
-                        let email = user.email {
-                        self.showMessage("Username: \(username)\nemail: \(email)")
-                    }
-                } catch _ {
-                    API.showError(self)
-                }
+        API.requestObject(Router.getUser(username: username), viewController: self) { (user: User) in
+            if let username = user.username,
+                let email = user.email {
+                self.showMessage("Username: \(username)\nemail: \(email)")
+            }
         }
     }
     
     func login(_ username: String, _ password: String) {
-        API.request(Router.login(username: username, password: password), viewController:self)
-            .responseObject { (response: DataResponse<OAuth2Token>) in
-                do {
-                    let oauth2Token = try response.result.get()
-                    
-                    if let accessToken = oauth2Token.accessToken {
-                        print("Access token \(accessToken)")
-                        self.showMessage("Access token: \(accessToken)")
-                    }
-                    if let refreshToken = oauth2Token.refreshToken {
-                        print("Refresh token \(refreshToken)")
-                    }
-                    
-                    print("Is token expired: \(oauth2Token.isExpired())")
-                    
-                    AuthManager.oauth2Token = oauth2Token
-                } catch _ {
-                    print("Invalid information received from the service")
-                    return
-                }
+        API.requestObject(Router.login(username: username, password: password), viewController: self) { (oauth2Token: OAuth2Token) in
+            if let accessToken = oauth2Token.accessToken {
+                print("Access token \(accessToken)")
+                self.showMessage("Access token: \(accessToken)")
+            }
+            if let refreshToken = oauth2Token.refreshToken {
+                print("Refresh token \(refreshToken)")
+            }
+            
+            print("Is token expired: \(oauth2Token.isExpired())")
+            
+            AuthManager.oauth2Token = oauth2Token
         }
     }
     
