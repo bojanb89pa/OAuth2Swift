@@ -15,8 +15,6 @@ class API: NSObject {
     
     static let session: Session = {
         let configuration = URLSessionConfiguration.default
-//        configuration.httpAdditionalHeaders = Session.default
-        
         return Session(configuration: configuration, interceptor: OAuth2Handler())
     }()
     
