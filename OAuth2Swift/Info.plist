@@ -24,6 +24,23 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+		<key>NSExceptionDomains</key>
+		<dict>
+            <key>localhost</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSTemporaryExceptionMinimumTLSVersion</key>
+                <string>TLSv1.1</string>
+            </dict>
+		</dict>
+	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -44,7 +61,7 @@
 	<key>SERVER_URL</key>
 	<string>REPLACE_ME</string>
 	<key>SERVER_URL_DEBUG</key>
-	<string>http://172.25.101.57:8080</string>
+	<string>http://localhost:8080</string>
 	<key>clientName</key>
 	<string>test_client</string>
 	<key>clientSecret</key>
