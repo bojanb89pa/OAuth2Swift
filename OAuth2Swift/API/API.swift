@@ -37,8 +37,9 @@ class API: NSObject {
     
     
     static public func request(_ urlRequest: URLRequestConvertible, viewController: UIViewController? = nil) -> DataRequest {
-        
-        return session.request(urlRequest).validate().debugLog().responseData { response in
+        let task = session.request(urlRequest).validate()
+        return task.responseData { response in
+            task.debugLog()
             switch response.result {
             case .success:
                 print("Validation Successful")

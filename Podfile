@@ -9,7 +9,7 @@ target 'OAuth2Swift' do
   # Pods for OAuth2Swift
   inhibit_all_warnings!
 
-  pod 'Alamofire'
+  pod 'Alamofire', '= 5.0.0-beta.6'
   pod 'AlamofireObjectMapper'
 
   target 'OAuth2SwiftTests' do

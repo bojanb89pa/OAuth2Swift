@@ -9,10 +9,9 @@
 import Alamofire
 
 extension Request {
-    public func debugLog() -> Self {
+    public func debugLog(){
         #if DEBUG
-            debugPrint(self)
+            print(debugDescription)
         #endif
-        return self
     }
 }

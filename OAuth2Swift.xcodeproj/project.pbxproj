@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		363195F4232908D300E5DA15 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363195F2232908D300E5DA15 /* String+Extensions.swift */; };
+		363195F5232908D300E5DA15 /* ViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363195F3232908D300E5DA15 /* ViewController+Extensions.swift */; };
+		363195F92329184500E5DA15 /* DebugConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363195F82329184500E5DA15 /* DebugConfig.swift */; };
 		364996A21E1E6E4600E70E52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996A11E1E6E4600E70E52 /* AppDelegate.swift */; };
 		364996A71E1E6E4600E70E52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 364996A51E1E6E4600E70E52 /* Main.storyboard */; };
 		364996A91E1E6E4600E70E52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 364996A81E1E6E4600E70E52 /* Assets.xcassets */; };
@@ -14,9 +17,7 @@
 		364996B71E1E6E4600E70E52 /* OAuth2SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996B61E1E6E4600E70E52 /* OAuth2SwiftTests.swift */; };
 		364996C21E1E6E4600E70E52 /* OAuth2SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996C11E1E6E4600E70E52 /* OAuth2SwiftUITests.swift */; };
 		364996E81E1E75CB00E70E52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996E71E1E75CB00E70E52 /* ViewController.swift */; };
-		364996EB1E1E768900E70E52 /* StringUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364996EA1E1E768900E70E52 /* StringUtils.swift */; };
 		368153591E3A01DA00BB3D3A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 368153581E3A01DA00BB3D3A /* Localizable.strings */; };
-		36C89A9E212470FB004ABF03 /* DebugConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89A98212470FB004ABF03 /* DebugConfig.swift */; };
 		36C89A9F212470FB004ABF03 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89A99212470FB004ABF03 /* Router.swift */; };
 		36C89AA0212470FB004ABF03 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89A9A212470FB004ABF03 /* AuthManager.swift */; };
 		36C89AA1212470FB004ABF03 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89A9B212470FB004ABF03 /* API.swift */; };
@@ -29,7 +30,6 @@
 		36C89AF721247EC0004ABF03 /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89AF221247EC0004ABF03 /* OAuth2Token.swift */; };
 		36C89AF921248118004ABF03 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89AF821248118004ABF03 /* KeychainConfiguration.swift */; };
 		36C89AFB21256085004ABF03 /* KeychainTokenItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C89AFA21256085004ABF03 /* KeychainTokenItem.swift */; };
-		36E8479C1E53428200498963 /* ViewControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E8479B1E53428200498963 /* ViewControllerUtils.swift */; };
 		79C4F35AC49920478814419B /* libPods-OAuth2SwiftUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 689445FDD4FC43A83B05D93A /* libPods-OAuth2SwiftUITests.a */; };
 		9A88D6515AD4889F45DA09CD /* libPods-OAuth2SwiftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60770439131B1924E1B7042D /* libPods-OAuth2SwiftTests.a */; };
 		EF6DC0609422A0BB1EFDB374 /* libPods-OAuth2Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C29B7258F501D581188E04 /* libPods-OAuth2Swift.a */; };
@@ -54,6 +54,9 @@
 
 /* Begin PBXFileReference section */
 		11D1C2377EFB10968C03CE6A /* Pods-OAuth2SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAuth2SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OAuth2SwiftTests/Pods-OAuth2SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
+		363195F2232908D300E5DA15 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		363195F3232908D300E5DA15 /* ViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+Extensions.swift"; sourceTree = "<group>"; };
+		363195F82329184500E5DA15 /* DebugConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugConfig.swift; sourceTree = "<group>"; };
 		3649969E1E1E6E4600E70E52 /* OAuth2Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OAuth2Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		364996A11E1E6E4600E70E52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		364996A61E1E6E4600E70E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -67,9 +70,7 @@
 		364996C11E1E6E4600E70E52 /* OAuth2SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2SwiftUITests.swift; sourceTree = "<group>"; };
 		364996C31E1E6E4600E70E52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		364996E71E1E75CB00E70E52 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		364996EA1E1E768900E70E52 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
 		368153581E3A01DA00BB3D3A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		36C89A98212470FB004ABF03 /* DebugConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugConfig.swift; sourceTree = "<group>"; };
 		36C89A99212470FB004ABF03 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		36C89A9A212470FB004ABF03 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		36C89A9B212470FB004ABF03 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 		36C89AF221247EC0004ABF03 /* OAuth2Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
 		36C89AF821248118004ABF03 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
 		36C89AFA21256085004ABF03 /* KeychainTokenItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTokenItem.swift; sourceTree = "<group>"; };
-		36E8479B1E53428200498963 /* ViewControllerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerUtils.swift; sourceTree = "<group>"; };
 		3FB3E14B45792FCCB038730C /* Pods-OAuth2SwiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAuth2SwiftUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OAuth2SwiftUITests/Pods-OAuth2SwiftUITests.release.xcconfig"; sourceTree = "<group>"; };
 		44778CD19B52E280E1C15489 /* Pods-OAuth2Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAuth2Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-OAuth2Swift/Pods-OAuth2Swift.release.xcconfig"; sourceTree = "<group>"; };
 		60770439131B1924E1B7042D /* libPods-OAuth2SwiftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OAuth2SwiftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +121,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		363195F1232908D300E5DA15 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				363195F2232908D300E5DA15 /* String+Extensions.swift */,
+				363195F3232908D300E5DA15 /* ViewController+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		364996951E1E6E4600E70E52 = {
 			isa = PBXGroup;
 			children = (
@@ -148,7 +157,7 @@
 			children = (
 				364996D31E1E757F00E70E52 /* Model */,
 				364996CF1E1E757F00E70E52 /* API */,
-				364996E91E1E768900E70E52 /* Utils */,
+				363195F1232908D300E5DA15 /* Extensions */,
 				364996A11E1E6E4600E70E52 /* AppDelegate.swift */,
 				364996A51E1E6E4600E70E52 /* Main.storyboard */,
 				364996E71E1E75CB00E70E52 /* ViewController.swift */,
@@ -183,9 +192,9 @@
 			children = (
 				36C89AF821248118004ABF03 /* KeychainConfiguration.swift */,
 				36C89AFA21256085004ABF03 /* KeychainTokenItem.swift */,
-				36C89A98212470FB004ABF03 /* DebugConfig.swift */,
 				36C89A99212470FB004ABF03 /* Router.swift */,
 				36C89A9A212470FB004ABF03 /* AuthManager.swift */,
+				363195F82329184500E5DA15 /* DebugConfig.swift */,
 				36C89A9B212470FB004ABF03 /* API.swift */,
 				36C89A9C212470FB004ABF03 /* OAuth2Handler.swift */,
 				36C89A9D212470FB004ABF03 /* AuthorizationType.swift */,
@@ -203,15 +212,6 @@
 				36C89AF221247EC0004ABF03 /* OAuth2Token.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		364996E91E1E768900E70E52 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				364996EA1E1E768900E70E52 /* StringUtils.swift */,
-				36E8479B1E53428200498963 /* ViewControllerUtils.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		53D9FB433A7AED1E0F9B6908 /* Frameworks */ = {
@@ -440,19 +440,19 @@
 				36C89AF321247EC0004ABF03 /* Health.swift in Sources */,
 				36C89AF621247EC0004ABF03 /* BaseModel.swift in Sources */,
 				36C89A9F212470FB004ABF03 /* Router.swift in Sources */,
+				363195F4232908D300E5DA15 /* String+Extensions.swift in Sources */,
 				36C89AA0212470FB004ABF03 /* AuthManager.swift in Sources */,
-				36C89A9E212470FB004ABF03 /* DebugConfig.swift in Sources */,
+				363195F5232908D300E5DA15 /* ViewController+Extensions.swift in Sources */,
 				36C89AA3212470FB004ABF03 /* AuthorizationType.swift in Sources */,
 				36C89AF421247EC0004ABF03 /* ApiError.swift in Sources */,
-				364996EB1E1E768900E70E52 /* StringUtils.swift in Sources */,
 				36C89AFB21256085004ABF03 /* KeychainTokenItem.swift in Sources */,
 				36C89AA2212470FB004ABF03 /* OAuth2Handler.swift in Sources */,
+				363195F92329184500E5DA15 /* DebugConfig.swift in Sources */,
 				36C89AF921248118004ABF03 /* KeychainConfiguration.swift in Sources */,
 				36C89AA1212470FB004ABF03 /* API.swift in Sources */,
 				36C89AF721247EC0004ABF03 /* OAuth2Token.swift in Sources */,
 				364996E81E1E75CB00E70E52 /* ViewController.swift in Sources */,
 				364996A21E1E6E4600E70E52 /* AppDelegate.swift in Sources */,
-				36E8479C1E53428200498963 /* ViewControllerUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,7 +35,7 @@ struct OAuth2Handler: RequestInterceptor {
         if let response = request.task?.response as? HTTPURLResponse {
             if response.statusCode == 401 {
                 if(AuthManager.oauth2Token?.refreshToken != nil) {
-                    session.request(Router.refresh).debugLog().responseObject{ (response: DataResponse<OAuth2Token>) in
+                    session.request(Router.refresh).responseObject{ (response: DataResponse<OAuth2Token>) in
                         
                         let statusCode = response.response?.statusCode
                         print("Status code: \(statusCode!)")
