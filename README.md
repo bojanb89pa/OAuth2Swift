@@ -12,4 +12,4 @@ Open terminal at root and run:
 
 Open workspace - OAuth2Swift.xcworkspace.
 
-Configure your server url (and debug server url) at OAuth2Swift/Info.plist.
+Configure your DEBUG_SERVER_URL (and SERVER_URL) at OAuth2Swift/Info.plist. If you use HTTP without SSL certificate, you should update exception domains list in arbitraty loads configuration in Info.plist. If you follow instructions from https://github.com/bojanb89pa/OAuth2Spring, you should be able to run this application on simulator with url http://localhost:8080 (current configuration).
